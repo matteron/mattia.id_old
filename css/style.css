@@ -221,17 +221,19 @@ h2 {
 	color: var(--fg);
 	text-decoration: none;
 }
-
-.navLink:hover {
-	text-decoration: underline;
-}
-
-.navLink > i {
+.navLink > .icon {
 	margin-right: 4px;
 }
 
-.navLink:hover > i {
+.navLink:hover > .icon {
 	animation: wiggle 1s infinite;
+}
+.navLink:hover > span {
+	text-decoration: underline;
+}
+
+.location {
+	color: var(--accent);
 }
 
 nav {
@@ -241,6 +243,10 @@ nav {
 article {
 	margin-top: 1rem;
 }
+
+/*
+*	MOBILE MEDIA
+*/
 
 @media screen and (max-width: 414px) {
 	body {
@@ -267,4 +273,45 @@ article {
 		height: 0.5rem;
 	}
 
+}
+
+/*
+*	FONT AWESOME OPTIMIZATIONS
+*/
+
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icomoon.eot?zfmrbu');
+  src:  url('../fonts/icomoon.eot?zfmrbu#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?zfmrbu') format('truetype'),
+    url('../fonts/icomoon.woff?zfmrbu') format('woff'),
+    url('../fonts/icomoon.svg?zfmrbu#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+.icon {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon';
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+}
+
+.i-user:before {
+  content: "\f007";
+}
+.i-twitter:before {
+  content: "\f099";
+}
+.i-umbrella:before {
+  content: "\f0e9";
+}
+.i-github:before {
+  content: "\f113";
 }
