@@ -34,7 +34,6 @@
 	/* Accent Colors */
 	--purple: #9c528b;
 	--red: #EF626C;
-	--pink: #EFB9CB;
 	--green: #7AA095;
 	--blue: #6D72C3;
 
@@ -61,11 +60,31 @@ html {
 }
 
 @keyframes wiggle {
-    0% { transform: rotate(0deg); }
+	0% { transform: rotate(0deg); }
    80% { transform: rotate(0deg); }
    85% { transform: rotate(5deg); }
-   95% { transform: rotate(-5deg); }
+   95% { transform: rotate(-5deg);}
   100% { transform: rotate(0deg); }
+}
+
+.slowWiggle:hover {
+	animation: wiggle 2s infinite;
+}
+
+.checkerboard {
+	background-image:
+		-moz-linear-gradient(90deg, var(--checker) 25%, transparent 25%), 
+		-moz-linear-gradient(-90deg, var(--checker) 25%, transparent 25%),
+		-moz-linear-gradient(90deg, transparent 75%, var(--checker) 75%),
+		-moz-linear-gradient(-90deg, transparent 75%, var(--checker) 75%);
+	background-image:
+		-webkit-gradient(linear, 0 100%, 100% 0, color-stop(.25, var(--checker)), color-stop(.25, transparent)), 
+		-webkit-gradient(linear, 0 0, 100% 100%, color-stop(.25, var(--checker)), color-stop(.25, transparent)),
+		-webkit-gradient(linear, 0 100%, 100% 0, color-stop(.75, transparent), color-stop(.75, var(--checker))),
+		-webkit-gradient(linear, 0 0, 100% 100%, color-stop(.75, transparent), color-stop(.75, var(--checker)));
+
+	background-size: 25px 25px;
+	background-position: 0 0, 12.5px 0, 12.5px -12.5px, 0px 12.5px;
 }
 
 @media (prefers-color-scheme: dark) 
@@ -83,70 +102,85 @@ body {
 	margin: 3rem auto;
 	color: var(--fg);
 	background: var(--bg);
-
-	background-image:
-      -moz-linear-gradient(90deg, var(--checker) 25%, transparent 25%), 
-      -moz-linear-gradient(-90deg, var(--checker) 25%, transparent 25%),
-      -moz-linear-gradient(90deg, transparent 75%, var(--checker) 75%),
-      -moz-linear-gradient(-90deg, transparent 75%, var(--checker) 75%);
-    background-image:
-      -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.25, var(--checker)), color-stop(.25, transparent)), 
-      -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.25, var(--checker)), color-stop(.25, transparent)),
-      -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.75, transparent), color-stop(.75, var(--checker))),
-      -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.75, transparent), color-stop(.75, var(--checker)));
-
-    background-size: 25px 25px;
-    
-    background-position:0 0, 12.5px 0, 12.5px -12.5px, 0px 12.5px;
 }
 
 main {
 	background: var(--bg);
 	border: 4px solid var(--fg);
-	box-shadow: 0 0 0 4px var(--accent);
+	box-shadow: 0 0 0 4px var(--accent),
+				-4px 4px 0 3px var(--shadow);
 	border-radius: 12px;
 	padding: 0 20px;
 }
 
-h1 {
-	font-family: "Fredoka One", cursive;
-	font-size: 42px;
+.red {
+	--accent: var(--red);
+}
+
+.blue {
+	--accent: var(--blue);
+}
+
+.green {
+	--accent: var(--green);
+}
+
+h1, h2 {
+	font-family: "Fredoka One";
 	margin: 0;
+}
+
+h1 {
+	font-size: 42px;
+}
+
+h2 {
+	text-align: center;
+}
+
+#homeLink {
+	color: var(--fg);
+	text-decoration: none;
 }
 
 #tiltedTop {
 	transform: rotate(-4deg);
 	margin-top: 1rem;
 }
+
 #topText {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 }
+
 #socialLinks {
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
 	margin-right: 1rem;
 }
+
 #socialLinks > a {
 	margin-right: 1rem;
 	color: var(--fg);
+}
+
+.hoverFloat {
 	transition: margin-top 0.1s ease,
 				text-shadow 0.1s ease;
 }
-#socialLinks > a:hover {
+
+.hoverFloat:hover {
 	transition: margin-top 0.1s ease,
 				text-shadow 0.1s ease;
 	text-shadow: -0.2rem 0.375rem 0 var(--shadow);
 	margin-top: -0.75rem;
-
-	animation: wiggle 2s infinite;
 }
+
 #git {
 	font-size: 42px;
-	
 }
+
 #twit {
 	font-size: 36px;
 }
@@ -155,7 +189,8 @@ h1 {
 	position: relative;
 	top: -1rem;
 }
-#headerLine > g > g {
+
+#headerLineColor {
 	stroke: var(--fg);
 }
 
@@ -176,6 +211,7 @@ h1 {
 	top: -1rem;
 	justify-content: flex-end;
 }
+
 #navList > li {
 	margin-right: 12px;
 }
@@ -185,6 +221,11 @@ h1 {
 	color: var(--fg);
 	text-decoration: none;
 }
+
+.navLink:hover {
+	text-decoration: underline;
+}
+
 .navLink > i {
 	margin-right: 4px;
 }
@@ -193,10 +234,37 @@ h1 {
 	animation: wiggle 1s infinite;
 }
 
-.navLink:hover {
-	text-decoration: underline;
-}
-
 nav {
 	height: 0;
+}
+
+article {
+	margin-top: 1rem;
+}
+
+@media screen and (max-width: 414px) {
+	body {
+		margin: 1rem auto;
+	}
+  	main {
+  		padding: 0 0.5rem;
+  		margin: 0 0.7rem;
+  	}
+
+  	#navList {
+  		top: -0.5rem;
+  	}
+
+  	#socialLinks > a {
+		margin-right: 1.5rem;
+	}
+
+	h1 {
+		line-height: 0.9;
+		margin-bottom: 0.5rem;
+	}
+	nav {
+		height: 0.5rem;
+	}
+
 }
