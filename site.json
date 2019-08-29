@@ -1,0 +1,29 @@
+[
+	{
+		"name": "index",
+		"description": "My Personal Site",
+		"accent": false,
+		"location": false,
+		"body": ""
+	},
+	{
+		"name": "about",
+		"title": "About - ",
+		"description": "About Me",
+		"accent": "green",
+		"location": {
+			"about": true
+		},
+		"body": ""
+	},
+	{
+		"name": "projects",
+		"title": "Projects - ",
+		"description": "My Projects",
+		"accent": "red",
+		"location": {
+			"projects": true
+		},
+		"body": ""
+	}
+]

@@ -1,17 +1,18 @@
 rm -rf dist
 mkdir dist
-for d in */
+dir="
+./css/
+./fonts/
+"
+for d in $dir
 do
 	mkdir dist/$d
 done
 rm -rf dist/dist
 
-HTML="index.html
-pages/*
-"
-for h in $HTML
+for h in pages/*
 do
-  html-minifier --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --remove-tag-whitespace --use-short-doctype --minify-css true --minify-js true $h > dist/$h
+	html-minifier --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --remove-tag-whitespace --use-short-doctype --minify-css true --minify-js true $h > dist/$h
 done
 
 for c in css/*
