@@ -59,6 +59,7 @@ data.forEach(page => {
 	let ext = '.html'
 	let loc = path.join(root.html, page.name + ext)
 	page.body = fs.readFileSync(loc, 'utf-8');
+	page.css = '<link rel="stylesheet" type="text/css" href="css/' + uglifyOutput + '" />';
 
 	let compiled = minify(mustache.render(base, page), minifyArgs);
 	let newPath = path.join(dist, page.name + ext)
