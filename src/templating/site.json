@@ -16,7 +16,7 @@
 			"about": true
 		},
 		"body": "",
-		"css": "",
+		"css": ""
 	},
 	{
 		"name": "projects",
@@ -27,6 +27,6 @@
 			"projects": true
 		},
 		"body": "",
-		"css": "",
+		"css": ""
 	}
 ]
