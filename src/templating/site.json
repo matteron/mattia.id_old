@@ -5,7 +5,8 @@
 		"accent": false,
 		"location": false,
 		"body": "",
-		"css": ""
+		"css": [],
+		"fonts": []
 	},
 	{
 		"name": "about",
@@ -16,7 +17,8 @@
 			"about": true
 		},
 		"body": "",
-		"css": ""
+		"css": [],
+		"fonts": []
 	},
 	{
 		"name": "projects",
@@ -27,6 +29,7 @@
 			"projects": true
 		},
 		"body": "",
-		"css": ""
+		"css": [],
+		"fonts": []
 	}
 ]

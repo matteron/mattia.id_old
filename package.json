@@ -5,7 +5,9 @@
   "main": "build.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node dev/build.js"
+    "build": "node dev/build.js",
+    "dev": "node dev/serve.js",
+    "clean": "node dev/clean.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +21,8 @@
   },
   "homepage": "https://github.com/matteron/mattia.id-version3#readme",
   "dependencies": {
+    "browser-sync": "^2.26.7",
+    "chalk": "^2.4.2",
     "html-minifier": "^4.0.0",
     "mustache": "^3.0.3",
     "rimraf": "^3.0.0",

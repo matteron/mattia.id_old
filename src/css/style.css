@@ -283,11 +283,11 @@ article {
 
 @font-face {
 	font-family: 'icomoon';
-	src:url('../fonts/icomoon.eot?zfmrbu');
-	src:url('../fonts/icomoon.eot?zfmrbu#iefix') format('embedded-opentype'),
-		url('../fonts/icomoon.ttf?zfmrbu') format('truetype'),
-		url('../fonts/icomoon.woff?zfmrbu') format('woff'),
-		url('../fonts/icomoon.svg?zfmrbu#icomoon') format('svg');
+	src:url('../fonts/icomoon.eot');
+	src:url('../fonts/icomoon.eot') format('embedded-opentype'),
+		url('../fonts/icomoon.ttf') format('truetype'),
+		url('../fonts/icomoon.woff') format('woff'),
+		url('../fonts/icomoon.svg') format('svg');
 	font-weight: normal;
 	font-style: normal;
 	font-display: block;

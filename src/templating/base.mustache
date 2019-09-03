@@ -4,28 +4,22 @@
 		<title>{{title}}mattia.id</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="Description" content="{{description}}">
+		{{#fonts}}
 		<link
 			rel="preload"
 			as="font"
-			type="font/woff2"
-			href="./fonts/fredoka-one.woff2"
+			type="font/{{type}}"
+			href="{{{path}}}"
 			crossorigin
 		/>
+		{{/fonts}}
+		{{#css}}
 		<link
-			rel="preload"
-			as="font"
-			type="font/woff2"
-			href="./fonts/kosugi-maru.woff2"
-			crossorigin
+			rel="stylesheet"
+			type="text/css"
+			href="{{{.}}}"
 		/>
-		<link
-			rel="preload"
-			as="font"
-			type="font/ttf"
-			href="./fonts/icomoon.ttf"
-			crossorigin
-		/>
-		{{{css}}}
+		{{/css}}
 	</head>
 	<body class="checkerboard">
 		<main{{#accent}} class="{{accent}}"{{/accent}}>
