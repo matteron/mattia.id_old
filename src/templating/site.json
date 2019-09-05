@@ -1,35 +1,29 @@
 [
 	{
 		"name": "index",
+		"type": "md",
 		"description": "My Personal Site",
 		"accent": false,
-		"location": false,
-		"body": "",
-		"css": [],
-		"fonts": []
+		"location": false
 	},
 	{
 		"name": "about",
+		"type": "md",
 		"title": "About - ",
 		"description": "About Me",
 		"accent": "green",
 		"location": {
 			"about": true
-		},
-		"body": "",
-		"css": [],
-		"fonts": []
+		}
 	},
 	{
 		"name": "projects",
+		"type": "md",
 		"title": "Projects - ",
 		"description": "My Projects",
 		"accent": "red",
 		"location": {
 			"projects": true
-		},
-		"body": "",
-		"css": [],
-		"fonts": []
+		}
 	}
 ]

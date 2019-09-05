@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const chalk = require('chalk');
 const rimraf = require('rimraf');
+const md = require('markdown-it')();
 const mustache = require('mustache');
 const uglifycss = require('uglifycss');
 const minify = require('html-minifier').minify;
@@ -147,9 +148,13 @@ module.exports = class Compiler {
 	}
 
 	template(page) {
-		let ext = '.html';
+		let ext = '.' + page.type;
 		let loc = path.join(this.rootPaths.html, page.name + ext);
-		page.body = fs.readFileSync(loc, 'utf-8');
+		if(page.type === "md") {
+			page.body = md.render(fs.readFileSync(loc, 'utf-8'));
+		} else {
+			page.body = fs.readFileSync(loc, 'utf-8');
+		}
 		page.css = this.cssLinks;
 		page.fonts = this.fontLinks;
 
@@ -170,7 +175,7 @@ module.exports = class Compiler {
 		} else {
 			compiled = mustache.render(this.siteBase, page);
 		}
-		let newPath = path.join(this.outputPath, page.name + ext)
+		let newPath = path.join(this.outputPath, page.name + '.html')
 		fs.writeFileSync(newPath, compiled);
 
 		console.log(chalk.yellow(' - Compiled: ') + page.name + ext);

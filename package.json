@@ -24,6 +24,7 @@
     "browser-sync": "^2.26.7",
     "chalk": "^2.4.2",
     "html-minifier": "^4.0.0",
+    "markdown-it": "^9.1.0",
     "mustache": "^3.0.3",
     "rimraf": "^3.0.0",
     "uglifycss": "0.0.29"
