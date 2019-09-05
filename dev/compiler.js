@@ -1,12 +1,13 @@
 const fs = require('fs');
 const path = require('path');
-const chalk = require('chalk');
 const rimraf = require('rimraf');
 const md = require('markdown-it')();
+const logger = require('./logger.js');
 const mustache = require('mustache');
 const uglifycss = require('uglifycss');
 const minify = require('html-minifier').minify;
 
+const log = new logger();
 
 module.exports = class Compiler {
 	// options = {
@@ -14,7 +15,6 @@ module.exports = class Compiler {
 	// 	cssName: 'ugly.css'
 	// }
 	constructor(options) {
-
 		this.options = options;
 		this.build = options.build;
 		this.rootPrefix = './src/';
@@ -46,7 +46,7 @@ module.exports = class Compiler {
 	mkdirs() {
 		if (fs.existsSync(this.outputPath)) {
 			// Means we've found an existing temp directory
-			console.log(chalk.green('Output Path Found 🔍\n'));
+			log.print('outputfound', [true]);
 		} else {
 			fs.mkdirSync(this.outputPath);
 			// Temp doesn't need folders for css or fonts as they aren't compiled
@@ -54,7 +54,7 @@ module.exports = class Compiler {
 				fs.mkdirSync(path.join(this.outputPath, this.dirs.css));
 				fs.mkdirSync(path.join(this.outputPath, this.dirs.fonts));
 			}
-			console.log(chalk.green('Created output paths 📁\n'));
+			log.print('outputfound', [false]);
 		}
 	}
 
@@ -62,7 +62,7 @@ module.exports = class Compiler {
 		var cssFiles = fs.readdirSync(this.rootPaths.css);
 		this.cssLinks = [];
 		if (this.build) {
-			console.log(chalk.cyan('Uglifying CSS...'));
+			log.print('verb', ['Uglifying', 'CSS']);
 			cssFiles.forEach((file, i) => {
 				cssFiles[i] = path.join(this.rootPaths.css, file);
 			});
@@ -72,16 +72,17 @@ module.exports = class Compiler {
 				uglyPath,
 				uglified
 			);
+			log.print('file', ['Output', this.uglifyOutput]);
 			this.cssLinks.push('css/' + this.uglifyOutput);
-			console.log(chalk.yellow(' - Output to: ') + uglyPath);
-			console.log(chalk.green('Finished Uglifying 🦢\n'));
+			log.print('file', ['Linked', this.uglifyOutput]);
+			log.print('verb', ['Uglifying', 'CSS', 'Finished']);
 		} else {
-			console.log(chalk.cyan('Creating CSS Links...'));
+			log.print('verb', ['Linking', 'CSS']);
 			cssFiles.forEach((file) => {
 				this.cssLinks.push(path.join(this.dirs.css, file));
-				console.log(chalk.yellow(' - Linked: ') + file);
+				log.print('file', ['Linked', file]);
 			});
-			console.log(chalk.green('Finished Linking Stylesheets 🔗\n'));
+			log.print('verb', ['Linking', 'CSS', 'Finished']);
 		}
 	}
 
@@ -89,17 +90,17 @@ module.exports = class Compiler {
 		var fontFiles = fs.readdirSync(this.rootPaths.fonts);
 		this.fontLinks = [];
 		if (this.build) {
-			console.log(chalk.cyan('Copying Fonts...'));
+			log.print('verb', ['Copying', 'Fonts']);
 			fs.readdirSync(this.rootPaths.fonts).forEach((font) => {
 				fs.copyFileSync(
 					path.join(this.rootPaths.fonts, font),
 					path.join(this.outputPath, this.dirs.fonts, font)
 				);
-				console.log(chalk.yellow(' - Copied: ') + font);
+				log.print('file', ['Copied', font]);
 			});
-			console.log(chalk.green('Finished Copying Fonts 📦\n'));
+			log.print('verb', ['Copying', 'Fonts', 'Finished']);
 		}
-		console.log(chalk.cyan('Creating Font Links...'));
+		log.print('verb', ['Linking', 'Fonts']);
 		var fontBreakdown = [];
 		fontFiles.forEach((file) => {
 			let type = path.extname(file);
@@ -133,30 +134,32 @@ module.exports = class Compiler {
 						type: ext.substring(1),
 						path: path.join(linkPath, e.font + ext)
 					});
-					console.log(chalk.yellow(' - Linked: ') + e.font + ext);
+					log.print('file', ['Linked', e.font + ext]);
 					return true;
 				}
 			});
 		});
-		console.log(chalk.green('Finished Linking Fonts 🔗\n'));
+		log.print('verb', ['Linking', 'Fonts', 'Finished']);
 	}
 
 	html() {
-		console.log(chalk.cyan('Compiling Templates...'));
+		log.print('verb', ['Compiling', 'Templates']);
 		this.siteData.forEach(page => this.template(page));
-		console.log(chalk.green('Finished Compiling Templates 📝\n'));
+		log.print('verb', ['Compiling', 'Templates', 'Finished']);
 	}
 
 	template(page) {
+		const typeFunctions = {
+			"md": () => { return md.render(fs.readFileSync(loc, 'utf-8')); },
+			"html": () => { return fs.readFileSync(loc, 'utf-8'); }
+		};
+
 		let ext = '.' + page.type;
 		let loc = path.join(this.rootPaths.html, page.name + ext);
-		if(page.type === "md") {
-			page.body = md.render(fs.readFileSync(loc, 'utf-8'));
-		} else {
-			page.body = fs.readFileSync(loc, 'utf-8');
-		}
-		page.css = this.cssLinks;
-		page.fonts = this.fontLinks;
+		
+		page.data.body = typeFunctions[page.type]();
+		page.data.css = this.cssLinks;
+		page.data.fonts = this.fontLinks;
 
 		let compiled = '';
 		if(this.build){
@@ -171,14 +174,14 @@ module.exports = class Compiler {
 				minifyCSS: true,
 				minifyJS: true
 			}
-			compiled = minify(mustache.render(this.siteBase, page), minifyArgs);
+			compiled = minify(mustache.render(this.siteBase, page.data), minifyArgs);
 		} else {
-			compiled = mustache.render(this.siteBase, page);
+			compiled = mustache.render(this.siteBase, page.data);
 		}
 		let newPath = path.join(this.outputPath, page.name + '.html')
 		fs.writeFileSync(newPath, compiled);
 
-		console.log(chalk.yellow(' - Compiled: ') + page.name + ext);
+		log.print('file', ['Compiled', page.name + ext]);
 	}
 
 	compile() {
@@ -190,6 +193,6 @@ module.exports = class Compiler {
 
 	clean() {
 		rimraf.sync(this.outputPath);
-		console.log(chalk.green('Cleaned ') + this.outputPath);
+		log.print('cleaned', [this.outputPath]);
 	}
 }

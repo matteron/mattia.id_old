@@ -2,28 +2,34 @@
 	{
 		"name": "index",
 		"type": "md",
-		"description": "My Personal Site",
-		"accent": false,
-		"location": false
+		"data": {
+			"description": "My Personal Site",
+			"accent": false,
+			"location": false
+		}
 	},
 	{
 		"name": "about",
 		"type": "md",
-		"title": "About - ",
-		"description": "About Me",
-		"accent": "green",
-		"location": {
-			"about": true
+		"data": {
+			"title": "About - ",
+			"description": "About Me",
+			"accent": "green",
+			"location": {
+				"about": true
+			}
 		}
 	},
 	{
 		"name": "projects",
 		"type": "md",
-		"title": "Projects - ",
-		"description": "My Projects",
-		"accent": "red",
-		"location": {
-			"projects": true
+		"data": {
+			"title": "Projects - ",
+			"description": "My Projects",
+			"accent": "red",
+			"location": {
+				"projects": true
+			}
 		}
 	}
 ]
