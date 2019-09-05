@@ -2,7 +2,7 @@ const chalk = require('chalk');
 
 // This is a purposely overly complicated console output.
 // Why? Cuz it was kinda fun.
-module.exports = class Logger {
+class Logger {
 	constructor() {
 
 		this.verbmoji = {
@@ -38,3 +38,5 @@ module.exports = class Logger {
 		console.log(this.commands[command](...args));
 	}
 }
+
+module.exports = new Logger();

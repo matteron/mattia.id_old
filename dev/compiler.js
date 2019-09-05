@@ -1,13 +1,11 @@
 const fs = require('fs');
 const path = require('path');
 const rimraf = require('rimraf');
+const log = require('./logger.js');
 const md = require('markdown-it')();
-const logger = require('./logger.js');
 const mustache = require('mustache');
 const uglifycss = require('uglifycss');
 const minify = require('html-minifier').minify;
-
-const log = new logger();
 
 module.exports = class Compiler {
 	// options = {
@@ -23,9 +21,10 @@ module.exports = class Compiler {
 			css: 'css',
 			js: 'js',
 			fonts: 'fonts',
-			temps: 'templating'
+			temps: 'templating',
+			blog: 'blog'
 		}
-		this.rootPaths = {
+		this.src = {
 			html: path.join(this.rootPrefix, this.dirs.html),
 			css: path.join(this.rootPrefix, this.dirs.css),
 			js : path.join(this.rootPrefix, this.dirs.js),
@@ -37,8 +36,8 @@ module.exports = class Compiler {
 		}
 		this.outputPath = this.build ? 'dist' : 'dev/temp';
 		this.uglifyOutput = options.cssName ? options.cssName : 'ugly.css';
-		this.siteBase = fs.readFileSync(this.rootPaths.temps.base, 'utf-8');
-		this.siteData = require(this.rootPaths.temps.data);
+		this.siteBase = fs.readFileSync(this.src.temps.base, 'utf-8');
+		this.siteData = require(this.src.temps.data);
 		this.cssLinks = [];
 		this.fontLinks = [];
 	}
@@ -49,6 +48,7 @@ module.exports = class Compiler {
 			log.print('outputfound', [true]);
 		} else {
 			fs.mkdirSync(this.outputPath);
+			fs.mkdirSync(path.join(this.outputPath, this.dirs.blog));
 			// Temp doesn't need folders for css or fonts as they aren't compiled
 			if (this.build) {
 				fs.mkdirSync(path.join(this.outputPath, this.dirs.css));
@@ -59,12 +59,12 @@ module.exports = class Compiler {
 	}
 
 	css() {
-		var cssFiles = fs.readdirSync(this.rootPaths.css);
+		var cssFiles = fs.readdirSync(this.src.css);
 		this.cssLinks = [];
 		if (this.build) {
 			log.print('verb', ['Uglifying', 'CSS']);
 			cssFiles.forEach((file, i) => {
-				cssFiles[i] = path.join(this.rootPaths.css, file);
+				cssFiles[i] = path.join(this.src.css, file);
 			});
 			const uglified = uglifycss.processFiles(cssFiles);
 			const uglyPath = path.join(this.outputPath, this.dirs.css, this.uglifyOutput)
@@ -73,13 +73,13 @@ module.exports = class Compiler {
 				uglified
 			);
 			log.print('file', ['Output', this.uglifyOutput]);
-			this.cssLinks.push('css/' + this.uglifyOutput);
+			this.cssLinks.push(path.join('/', this.dirs.css, this.uglifyOutput));
 			log.print('file', ['Linked', this.uglifyOutput]);
 			log.print('verb', ['Uglifying', 'CSS', 'Finished']);
 		} else {
 			log.print('verb', ['Linking', 'CSS']);
 			cssFiles.forEach((file) => {
-				this.cssLinks.push(path.join(this.dirs.css, file));
+				this.cssLinks.push(path.join('/', this.dirs.css, file));
 				log.print('file', ['Linked', file]);
 			});
 			log.print('verb', ['Linking', 'CSS', 'Finished']);
@@ -87,13 +87,13 @@ module.exports = class Compiler {
 	}
 
 	fonts() {
-		var fontFiles = fs.readdirSync(this.rootPaths.fonts);
+		var fontFiles = fs.readdirSync(this.src.fonts);
 		this.fontLinks = [];
 		if (this.build) {
 			log.print('verb', ['Copying', 'Fonts']);
-			fs.readdirSync(this.rootPaths.fonts).forEach((font) => {
+			fs.readdirSync(this.src.fonts).forEach((font) => {
 				fs.copyFileSync(
-					path.join(this.rootPaths.fonts, font),
+					path.join(this.src.fonts, font),
 					path.join(this.outputPath, this.dirs.fonts, font)
 				);
 				log.print('file', ['Copied', font]);
@@ -124,7 +124,7 @@ module.exports = class Compiler {
 			'.svg',
 			'.eot'
 		];
-		const linkPath = this.build ? this.dirs.fonts : path.join(this.dirs.fonts);
+		const linkPath = path.join('/', this.dirs.fonts);
 		fontBreakdown.forEach((e) => {
 			// Yes I know it's gross, I just couldn't figure
 			// out how to return highest order in an array.
@@ -149,15 +149,17 @@ module.exports = class Compiler {
 	}
 
 	template(page) {
-		const typeFunctions = {
-			"md": () => { return md.render(fs.readFileSync(loc, 'utf-8')); },
-			"html": () => { return fs.readFileSync(loc, 'utf-8'); }
+		const typeCommands = {
+			html: (input) => input,
+			md: (input) => md.render(input),
+			mustache: (input, data) => mustache.render(input, data)
 		};
 
 		let ext = '.' + page.type;
-		let loc = path.join(this.rootPaths.html, page.name + ext);
-		
-		page.data.body = typeFunctions[page.type]();
+		let loc = path.join(this.src.html, page.name + ext);
+		let rawBody = fs.readFileSync(loc, 'utf-8');
+
+		page.data.body = typeCommands[page.type](rawBody, page.subdata);
 		page.data.css = this.cssLinks;
 		page.data.fonts = this.fontLinks;
 

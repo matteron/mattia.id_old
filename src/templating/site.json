@@ -22,7 +22,7 @@
 	},
 	{
 		"name": "projects",
-		"type": "md",
+		"type": "mustache",
 		"data": {
 			"title": "Projects - ",
 			"description": "My Projects",
@@ -30,6 +30,29 @@
 			"location": {
 				"projects": true
 			}
+		},
+		"subdata": {
+			"projects": [
+				{
+					"name": "tono",
+					"desc": "Cartridge based music player.",
+					"image": "blah"
+				},
+				{
+					"name": "test",
+					"desc": "test desc",
+					"image": "blah"
+				}
+			]
+		}
+	},
+	{
+		"name": "blog/tono",
+		"type": "md",
+		"data": {
+			"title": "tono - ",
+			"desciption": "Cartirdge based music player",
+			"accent": "blue"
 		}
 	}
 ]

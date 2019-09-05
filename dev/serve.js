@@ -20,9 +20,9 @@ function recompileTemplate(fp) {
 
 paths = {
 	templates: path.join(comp.rootPrefix, comp.dirs.temps, '*'),
-	css: path.join(comp.rootPaths.css, '*.css'),
+	css: path.join(comp.src.css, '*.css'),
 	compiled: comp.outputPath,
-	html: path.join(comp.rootPaths.html, '*.html')
+	html: path.join(comp.src.html, '*.html')
 }
 
 bs.watch(paths.templates).on('change', () => comp.html());
