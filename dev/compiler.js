@@ -152,10 +152,17 @@ module.exports = class Compiler {
 		const typeCommands = {
 			html: (input) => input,
 			md: (input) => md.render(input),
-			mustache: (input, data) => mustache.render(input, data)
+			mustache: (input, data) => mustache.render(input, data),
+			blog: (input, data) => md.render(mustache.render(input, data))
 		};
+		const extensionTable = {
+			html: '.html',
+			md: '.md',
+			mustache: '.mustache',
+			blog: '.md'
+		}
 
-		let ext = '.' + page.type;
+		let ext = extensionTable[page.type];
 		let loc = path.join(this.src.html, page.name + ext);
 		let rawBody = fs.readFileSync(loc, 'utf-8');
 

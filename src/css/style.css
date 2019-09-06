@@ -320,3 +320,14 @@ article {
 .i-github:before {
 	content: "\f113";
 }
+
+/*
+*	PROJECT LIST
+*/
+#projectList {
+
+}
+
+.projectEntry {
+	display: flex;
+}

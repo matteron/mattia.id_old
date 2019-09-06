@@ -3,9 +3,7 @@
 		"name": "index",
 		"type": "md",
 		"data": {
-			"description": "My Personal Site",
-			"accent": false,
-			"location": false
+			"description": "My Personal Site"
 		}
 	},
 	{
@@ -48,7 +46,10 @@
 	},
 	{
 		"name": "blog/tono",
-		"type": "md",
+		"type": "blog",
+		"subdata": {
+			"date": "2019-09-05"
+		},
 		"data": {
 			"title": "tono - ",
 			"desciption": "Cartirdge based music player",

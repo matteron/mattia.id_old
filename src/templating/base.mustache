@@ -91,7 +91,10 @@
 					</ul>
 				</nav>
 			</header>
-			<article class="smallShadow">
+			<article 
+				class="smallShadow{{^location.projects}} markdown{{/location.projects}}"
+				{{#location.projects}}id="projectList"{{/location.projects}}
+			>
 				{{{ body }}}
 			</article>
 		</main>
