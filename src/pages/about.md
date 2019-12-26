@@ -6,4 +6,4 @@ My current gig is working as a Software Consultant at Tallan Inc. in Glastonbury
 
 So, I'm a programmer by trade and have putzed around with some design and hardware work in my spare time.
 
-My ongoing passion project is [Tono](https://mattia.id/projects.html), a cart based digital music player.  It's a pretty dumb idea, but I really love working on it.
+My ongoing passion project is [Tono](https://mattia.id/blog/tono), a cart based digital music player.  It's a pretty dumb idea, but I really love working on it.
