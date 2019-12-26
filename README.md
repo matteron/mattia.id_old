@@ -3,9 +3,9 @@
 
 In my never ending attempt at making a nice looking website, I made another.
 
-I decided to allow myself non default fonts, because I wanted to play around with this idea.
+I decided to allow myself non default fonts, because I wanted to play around with this design.
 
-Thus, I cared less about load times this time, because as usual, I was preoptimizing.
+Thus, I cared less about load times this time, because as usual, I was preoptimizing.  I mean it's still a tiny website, just now I permit fonts to load.
 
 # Templating System
 I realized that maintaing consistent, static html files was gonna be a pain, so I went through and tried to make a templating and build system.
