@@ -140,6 +140,15 @@ h2 {
 	text-align: center;
 }
 
+article a {
+	color: var(--accent);
+	text-decoration: none;
+}
+
+article a:hover {
+	text-decoration: underline;
+}
+
 #homeLink {
 	color: var(--fg);
 	text-decoration: none;
@@ -247,6 +256,27 @@ article {
 }
 
 /*
+*	PROJECT LIST
+*/
+
+.projectEntry {
+	display: flex;
+	align-items: center;
+}
+
+.projectInfo {
+	margin-left: 1em;
+}
+
+.projectTitle {
+	margin-bottom: 0.25em;
+}
+
+.projectDesc {
+	margin-top: 0.5em;
+}
+
+/*
 *	MOBILE MEDIA
 */
 
@@ -319,15 +349,4 @@ article {
 }
 .i-github:before {
 	content: "\f113";
-}
-
-/*
-*	PROJECT LIST
-*/
-#projectList {
-
-}
-
-.projectEntry {
-	display: flex;
 }

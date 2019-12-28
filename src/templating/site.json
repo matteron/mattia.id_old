@@ -34,12 +34,8 @@
 				{
 					"name": "tono",
 					"desc": "Cartridge based music player.",
-					"image": "blah"
-				},
-				{
-					"name": "test",
-					"desc": "test desc",
-					"image": "blah"
+					"image": "blah",
+					"link": "tono.html"
 				}
 			]
 		}
