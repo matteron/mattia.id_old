@@ -1,4 +1,4 @@
-# Tono
+## Tono
 ###### {{date}}
 
 Work in progress, just updating with what I have so far.
@@ -7,7 +7,7 @@ Work in progress, just updating with what I have so far.
 
 Tono is basically just a record player which takes cartridges instead of vinyl.  In the age of streaming services making it easy to quickly put music on without thinking, I wanted a device that could mimic the deliberate ritual that comes with a record player, without the associated price.  (I’m sure if I add up all the money I sunk into developing this thing, I probably aggressively missed that goal.)
 
-## Tono v1
+### Tono v1
 
 **Picture of old Tono**
 
@@ -47,4 +47,4 @@ I was exceptionally proud of it, and also extremely critical.  Terrible wiring a
 
 However these were all manageable problems, so I ignored them and carried on.  School was picking up again so I had to focus up and forget about it.
 
-## Tono v2
+### Tono v2
