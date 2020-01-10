@@ -1,5 +1,5 @@
-## {{title}}
-###### {{date}}
+## Tono
+###### September, 5, 2019
 
 Work in progress, just updating with what I have so far.
 
