@@ -32,6 +32,21 @@ const src = Object.freeze({
 const meta = require(path.join(src.template, 'meta'));
 const template = require(path.join(src.template, 'template'));
 
+// Type Commands
+function markdown(page) {
+	const folder = meta.isProject(page)
+		? src.projects
+		: src.pages;
+	const loc = path.join(folder, page.name.toLowerCase() + '.md');
+	const rawBody = fs.readFileSync(loc, 'utf-8');
+	return md.render(rawBody);
+}
+
+function projectList() {
+	const projects = meta.pages.filter(p => meta.isProject(p));
+	return template.projectList(projects);
+}
+
 module.exports = class Compiler {
 	
 	constructor(isBuild) {
@@ -74,7 +89,6 @@ module.exports = class Compiler {
 			);
 			log.print('file', ['Output', cssName]);
 			this.cssLinks.push(path.join('/', dirs.css, cssName));
-			log.print('file', ['Linked', cssName]);
 			log.print('verb', ['Uglifying', 'CSS', 'Finished']);
 		} else {
 			log.print('verb', ['Linking', 'CSS']);
@@ -210,19 +224,4 @@ module.exports = class Compiler {
 			dirs: dirs
 		}
 	}
-}
-
-// Type Commands
-function markdown(page) {
-	const folder = meta.isProject(page)
-		? src.projects
-		: src.pages;
-	const loc = path.join(folder, page.name.toLowerCase() + '.md');
-	const rawBody = fs.readFileSync(loc, 'utf-8');
-	return md.render(rawBody);
-}
-
-function projectList() {
-	const projects = meta.pages.filter(p => meta.isProject(p));
-	return template.projectList(projects);
 }
