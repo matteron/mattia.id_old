@@ -1,4 +1,4 @@
-## Tono
+## {{title}}
 ###### {{date}}
 
 Work in progress, just updating with what I have so far.

@@ -3,41 +3,40 @@ const path = require('path');
 const rimraf = require('rimraf');
 const log = require('./logger.js');
 const md = require('markdown-it')();
-const mustache = require('mustache');
 const uglifycss = require('uglifycss');
 const minify = require('html-minifier').minify;
 
+const rootDir = './src/';
+const cssName = 'ugly.css';
+
+function rootPath(dir) {
+	return path.join(rootDir, dir);
+}
+
+const dirs = Object.freeze({
+	pages: 'pages',
+	projects: 'projects',
+	css: 'media/css',
+	fonts: 'media/fonts',
+	template: 'template'
+});
+
+const src = Object.freeze({
+	pages: rootPath(dirs.pages),
+	projects: path.join(rootPath(dirs.pages), dirs.projects),
+	css: rootPath(dirs.css),
+	fonts: rootPath(dirs.fonts),
+	template: '../' + rootPath(dirs.template)
+});
+
+const meta = require(path.join(src.template, 'meta'));
+const template = require(path.join(src.template, 'template'));
+
 module.exports = class Compiler {
-	// options = {
-	// 	build: boolean,
-	// 	cssName: 'ugly.css'
-	// }
-	constructor(options) {
-		this.options = options;
-		this.build = options.build;
-		this.rootPrefix = './src/';
-		this.dirs = {
-			html: 'pages',
-			css: 'css',
-			js: 'js',
-			fonts: 'fonts',
-			temps: 'templating',
-			blog: 'blog'
-		}
-		this.src = {
-			html: path.join(this.rootPrefix, this.dirs.html),
-			css: path.join(this.rootPrefix, this.dirs.css),
-			js : path.join(this.rootPrefix, this.dirs.js),
-			fonts: path.join(this.rootPrefix, this.dirs.fonts),
-			temps: {
-				base: path.join(this.rootPrefix, this.dirs.temps, 'base.mustache'),
-				data: path.join('../src/', this.dirs.temps, 'site.json')
-			}
-		}
-		this.outputPath = this.build ? 'dist' : 'dev/temp';
-		this.uglifyOutput = options.cssName ? options.cssName : 'ugly.css';
-		this.siteBase = fs.readFileSync(this.src.temps.base, 'utf-8');
-		this.siteData = require(this.src.temps.data);
+	
+	constructor(isBuild) {
+		this.isBuild = isBuild;
+		this.outputPath = isBuild ? 'dist' : 'dev/temp';
 		this.cssLinks = [];
 		this.fontLinks = [];
 	}
@@ -48,38 +47,39 @@ module.exports = class Compiler {
 			log.print('outputfound', [true]);
 		} else {
 			fs.mkdirSync(this.outputPath);
-			fs.mkdirSync(path.join(this.outputPath, this.dirs.blog));
+			fs.mkdirSync(path.join(this.outputPath, dirs.projects));
 			// Temp doesn't need folders for css or fonts as they aren't compiled
-			if (this.build) {
-				fs.mkdirSync(path.join(this.outputPath, this.dirs.css));
-				fs.mkdirSync(path.join(this.outputPath, this.dirs.fonts));
+			fs.mkdirSync(path.join(this.outputPath, 'media'));
+			if (this.isBuild) {
+				fs.mkdirSync(path.join(this.outputPath, dirs.css));
+				fs.mkdirSync(path.join(this.outputPath, dirs.fonts));
 			}
 			log.print('outputfound', [false]);
 		}
 	}
 
 	css() {
-		var cssFiles = fs.readdirSync(this.src.css);
+		var cssFiles = fs.readdirSync(src.css);
 		this.cssLinks = [];
-		if (this.build) {
+		if (this.isBuild) {
 			log.print('verb', ['Uglifying', 'CSS']);
 			cssFiles.forEach((file, i) => {
-				cssFiles[i] = path.join(this.src.css, file);
+				cssFiles[i] = path.join(src.css, file);
 			});
 			const uglified = uglifycss.processFiles(cssFiles);
-			const uglyPath = path.join(this.outputPath, this.dirs.css, this.uglifyOutput)
+			const uglyPath = path.join(this.outputPath, dirs.css, cssName)
 			fs.writeFileSync(
 				uglyPath,
 				uglified
 			);
-			log.print('file', ['Output', this.uglifyOutput]);
-			this.cssLinks.push(path.join('/', this.dirs.css, this.uglifyOutput));
-			log.print('file', ['Linked', this.uglifyOutput]);
+			log.print('file', ['Output', cssName]);
+			this.cssLinks.push(path.join('/', dirs.css, cssName));
+			log.print('file', ['Linked', cssName]);
 			log.print('verb', ['Uglifying', 'CSS', 'Finished']);
 		} else {
 			log.print('verb', ['Linking', 'CSS']);
 			cssFiles.forEach((file) => {
-				this.cssLinks.push(path.join('/', this.dirs.css, file));
+				this.cssLinks.push(path.join('/', dirs.css, file));
 				log.print('file', ['Linked', file]);
 			});
 			log.print('verb', ['Linking', 'CSS', 'Finished']);
@@ -87,14 +87,14 @@ module.exports = class Compiler {
 	}
 
 	fonts() {
-		var fontFiles = fs.readdirSync(this.src.fonts);
+		var fontFiles = fs.readdirSync(src.fonts);
 		this.fontLinks = [];
-		if (this.build) {
+		if (this.isBuild) {
 			log.print('verb', ['Copying', 'Fonts']);
-			fs.readdirSync(this.src.fonts).forEach((font) => {
+			fs.readdirSync(src.fonts).forEach((font) => {
 				fs.copyFileSync(
-					path.join(this.src.fonts, font),
-					path.join(this.outputPath, this.dirs.fonts, font)
+					path.join(src.fonts, font),
+					path.join(this.outputPath, dirs.fonts, font)
 				);
 				log.print('file', ['Copied', font]);
 			});
@@ -124,16 +124,13 @@ module.exports = class Compiler {
 			'.svg',
 			'.eot'
 		];
-		const linkPath = path.join('/', this.dirs.fonts);
+		const linkPath = path.join('/', dirs.fonts);
 		fontBreakdown.forEach((e) => {
 			// Yes I know it's gross, I just couldn't figure
 			// out how to return highest order in an array.
 			extOrder.some((ext) => {
 				if (e.types.includes(ext)) {
-					this.fontLinks.push({
-						type: ext.substring(1),
-						path: path.join(linkPath, e.font + ext)
-					});
+					this.fontLinks.push(path.join(linkPath, e.font + ext));
 					log.print('file', ['Linked', e.font + ext]);
 					return true;
 				}
@@ -142,36 +139,24 @@ module.exports = class Compiler {
 		log.print('verb', ['Linking', 'Fonts', 'Finished']);
 	}
 
-	html() {
-		log.print('verb', ['Compiling', 'Templates']);
-		this.siteData.forEach(page => this.template(page));
-		log.print('verb', ['Compiling', 'Templates', 'Finished']);
-	}
+	prepareTemplate(page) {
 
-	template(page) {
-		const typeCommands = {
-			html: (input) => input,
-			md: (input) => md.render(input),
-			mustache: (input, data) => mustache.render(input, data),
-			blog: (input, data) => md.render(mustache.render(input, data))
-		};
-		const extensionTable = {
-			html: '.html',
-			md: '.md',
-			mustache: '.mustache',
-			blog: '.md'
+		var body = meta.isProjectList(page)
+			? projectList()
+			: markdown(page);
+		return {
+			title: meta.isHome(page) ? '' : page.name,
+			desc: page.desc,
+			fonts: this.fontLinks,
+			css: this.cssLinks,
+			accent: meta.accentColors[page.type],
+			body: body
 		}
-
-		let ext = extensionTable[page.type];
-		let loc = path.join(this.src.html, page.name + ext);
-		let rawBody = fs.readFileSync(loc, 'utf-8');
-
-		page.data.body = typeCommands[page.type](rawBody, page.subdata);
-		page.data.css = this.cssLinks;
-		page.data.fonts = this.fontLinks;
-
-		let compiled = '';
-		if(this.build){
+	}
+	
+	processTemplate(params) {
+		var temp = template.base(params);
+		if (this.isBuild) {
 			const minifyArgs = {
 				collapseWhitespace: true,
 				removeComments: true,
@@ -183,17 +168,28 @@ module.exports = class Compiler {
 				minifyCSS: true,
 				minifyJS: true
 			}
-			compiled = minify(mustache.render(this.siteBase, page.data), minifyArgs);
-		} else {
-			compiled = mustache.render(this.siteBase, page.data);
+			return minify(temp);
 		}
-		let newPath = path.join(this.outputPath, page.name + '.html')
-		fs.writeFileSync(newPath, compiled);
-
-		log.print('file', ['Compiled', page.name + ext]);
+		return temp;
 	}
 
-	compile() {
+	compileHtml(page) {
+		const params = this.prepareTemplate(page);
+		const raw = this.processTemplate(params);
+		const loc = meta.isProject(page)
+			? dirs.projects
+			: '';
+		const fileName = page.name.toLowerCase() + '.html';
+		const out = path.join(this.outputPath, loc, fileName);
+		fs.writeFileSync(out, raw);
+		log.print('file', ['Compiled', fileName]);
+	}
+
+	html() {
+		meta.pages.forEach(page => this.compileHtml(page));
+	}
+
+	run() {
 		this.mkdirs();
 		this.css();
 		this.fonts();
@@ -204,4 +200,29 @@ module.exports = class Compiler {
 		rimraf.sync(this.outputPath);
 		log.print('cleaned', [this.outputPath]);
 	}
+
+	// For use in serve.js
+	paths() {
+		return {
+			outputPath: this.outputPath,
+			rootPrefix: rootDir,
+			src: src,
+			dirs: dirs
+		}
+	}
+}
+
+// Type Commands
+function markdown(page) {
+	const folder = meta.isProject(page)
+		? src.projects
+		: src.pages;
+	const loc = path.join(folder, page.name.toLowerCase() + '.md');
+	const rawBody = fs.readFileSync(loc, 'utf-8');
+	return md.render(rawBody);
+}
+
+function projectList() {
+	const projects = meta.pages.filter(p => meta.isProject(p));
+	return template.projectList(projects);
 }

@@ -1,5 +1,5 @@
 const Compiler = require('./compiler.js');
-let comp = new Compiler({build: true});
+let comp = new Compiler(true);
 console.log('Building...');
-comp.compile();
+comp.run();
 console.log('All Done 👍');
