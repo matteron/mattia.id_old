@@ -35,6 +35,11 @@ const pages = [
 		name: 'Tono',
 		type: pageTypes.project,
 		desc: 'Cartridge based digital music player.'
+	},
+	{
+		name: 'A-Menu',
+		type: pageTypes.project,
+		desc: 'Recipe Manager / Weekly Menu Generator for my Mom.'
 	}
 ];
 exports.pages = pages;
