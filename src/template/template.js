@@ -3,7 +3,7 @@ const { html, head, title, meta, body, main, header, section, div, a, h1, h2, as
 const { classes, lang, name, content, id, href, viewBox, version, xmlns, fill, fillRule, strokeDasharray, strokeLinecap, strokeOpacity, transform, stroke, strokeWidth, d } = require('./Haipa/attr');
 
 exports.base = function(p) {
-	return `<!DOCTYPE html>` + html([lang`en`], [
+	return html([lang`en`], [
 		head([], [
 			title([], [`${p.title ? `${p.title} - ` : ''}mattia.id`]),
 			meta([name`viewport`, content`width=device-width, initial-scale=1`]),
