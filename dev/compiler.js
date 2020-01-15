@@ -43,7 +43,7 @@ function markdown(page) {
 }
 
 function projectList() {
-	const projects = meta.pages.filter(p => meta.isProject(p));
+	const projects = meta.pages.filter(p => meta.isProject(p)).reverse();
 	return template.projectList(projects);
 }
 
