@@ -1,6 +1,6 @@
 const { allFonts, allCss, allProjects } = require('./haipaExt');
 const { html, head, title, meta, body, main, header, section, div, a, h1, h2, aside, i, nav, ul, li, span, article, svg, g, path } = require('./Haipa/tags');
-const { classes, lang, name, content, id, href, viewBox, version, xmlns } = require('./Haipa/attr');
+const { classes, lang, name, content, id, href, viewBox, version, xmlns, fill, fillRule, strokeDasharray, strokeLinecap, strokeOpacity, transform, stroke, strokeWidth, d } = require('./Haipa/attr');
 
 exports.base = function(p) {
 	return `<!DOCTYPE html>` + html([lang`en`], [
@@ -29,10 +29,10 @@ exports.base = function(p) {
 							])
 						]),
 						svg([version`1.1`, viewBox`0 0 525 4`, xmlns`http://www.w3.org/2000/svg`, id`headerLine`], [
-							g([`fill="none" fill-rule="evenodd" stroke-dasharray="12" stroke-linecap="round" stroke-opacity=".35"`], [
-								g([`transform="translate(-235 -369)" stroke="#222" stroke-width="4"`, id`headerLineColor`], [
-									g([`transform="translate(237 320)"`], [
-										path([`d="m0 51h550"`])
+							g([fill`none`, fillRule`evenodd`, strokeDasharray`12`, strokeLinecap`round`, strokeOpacity`.35`], [
+								g([transform`translate(-235, -369)`, stroke`#222`, strokeWidth`4`, id`headerLineColor`], [
+									g([transform`translate(237 320)`], [
+										path([d`m0 51h550`])
 									])
 								])
 							])
