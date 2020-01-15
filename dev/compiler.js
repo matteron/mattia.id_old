@@ -30,7 +30,7 @@ const src = Object.freeze({
 });
 
 const meta = require(path.join(src.template, 'meta'));
-const template = require(path.join(src.template, 'template'));
+const template = require(path.join(src.template, 'haipaTemplate'));
 
 // Type Commands
 function markdown(page) {

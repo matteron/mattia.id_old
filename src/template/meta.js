@@ -40,6 +40,11 @@ const pages = [
 		name: 'A-Menu',
 		type: pageTypes.project,
 		desc: 'Recipe Manager / Weekly Menu Generator for my Mom.'
+	},
+	{
+		name: 'Haipa',
+		type: pageTypes.project,
+		desc: 'HTML shorthand for JavaScript.'
 	}
 ];
 exports.pages = pages;
