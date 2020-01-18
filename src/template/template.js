@@ -1,6 +1,7 @@
+const haipa = require('haipa')(true);
 const { allFonts, allCss, allProjects } = require('./haipaExt');
-const { html, head, title, meta, body, main, header, section, div, a, h1, h2, aside, i, nav, ul, li, span, article, svg, g, path } = require('./Haipa/tags');
-const { classes, lang, name, content, id, href, viewBox, version, xmlns, fill, fillRule, strokeDasharray, strokeLinecap, strokeOpacity, transform, stroke, strokeWidth, d } = require('./Haipa/attr');
+const { html, head, title, meta, body, main, header, section, div, a, h1, h2, aside, i, nav, ul, li, span, article, svg, g, path } = haipa.tags;
+const { classes, lang, name, content, id, href, viewBox, version, xmlns, fill, fillRule, strokeDasharray, strokeLinecap, strokeOpacity, transform, stroke, strokeWidth, d } = haipa.attr;
 
 exports.base = function(p) {
 	return html([lang`en`], [
