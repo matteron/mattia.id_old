@@ -30,7 +30,7 @@ const src = Object.freeze({
 });
 
 const meta = require(path.join(src.template, 'meta'));
-const template = require(path.join(src.template, 'haipaTemplate'));
+const template = require(path.join(src.template, 'template'));
 
 // Type Commands
 function markdown(page) {
@@ -43,7 +43,7 @@ function markdown(page) {
 }
 
 function projectList() {
-	const projects = meta.pages.filter(p => meta.isProject(p));
+	const projects = meta.pages.filter(p => meta.isProject(p)).reverse();
 	return template.projectList(projects);
 }
 
