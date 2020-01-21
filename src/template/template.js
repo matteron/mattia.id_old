@@ -21,11 +21,11 @@ exports.base = function(p) {
 								h1([], ['Mattia Schiano'])
 							]),
 							aside([id`socialLinks`], [
-								a([id`git`, href`https://github.com/matteron`, classes`hoverFloat slowWiggle`, alt`Github`], [
-									i([classes`icon i-github`], [])
+								a([id`git`, href`https://github.com/matteron`, classes`hoverFloat slowWiggle`], [
+									i([classes`icon i-github`, alt`Github`], [])
 								]),
-								a([id`twit`, href`https://twitter.com/mattiaschiano_`, classes`hoverFloat slowWiggle`, alt`Twitter`], [
-									i([classes`icon i-twitter`], [])
+								a([id`twit`, href`https://twitter.com/mattiaschiano_`, classes`hoverFloat slowWiggle`], [
+									i([classes`icon i-twitter`, alt`Twitter`], [])
 								])
 							])
 						]),
