@@ -36,13 +36,10 @@ exports.allCss = function(cssList) {
 
 const projectListing = function(proj) {
 	return section([classes`projectEntry`], [
-		div([], ['img here ♪']),
-		div([classes`projectInfo`], [
-			h3([classes`projectTitle`], [
-				a([href(`projects/${proj.name}.html`)], [proj.name])
-			]),
-			p([classes`projectDesc`], [proj.desc])
-		])
+		h3([classes`projectTitle`], [
+			a([href(`projects/${proj.name}.html`)], [proj.name])
+		]),
+		p([classes`projectDesc`], [proj.desc])
 	]);
 }
 exports.projectListing = projectListing;

@@ -262,21 +262,13 @@ h2 {
 *	PROJECT LIST
 */
 
-.projectEntry {
-	display: flex;
-	align-items: center;
-}
-
-.projectInfo {
-	margin-left: 1em;
-}
-
 .projectTitle {
 	margin-bottom: 0.25em;
 }
 
 .projectDesc {
 	margin-top: 0.5em;
+	margin-left: 0.5em;
 }
 
 /*

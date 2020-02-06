@@ -44,7 +44,7 @@ const pages = [
 	{
 		name: 'Haipa',
 		type: pageTypes.project,
-		desc: 'HTML shorthand for JavaScript.'
+		desc: 'HTML templating shorthand for JavaScript.'
 	}
 ];
 exports.pages = pages;
