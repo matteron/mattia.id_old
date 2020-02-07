@@ -4,7 +4,10 @@ const rimraf = require('rimraf');
 const log = require('./logger.js');
 const md = require('markdown-it')();
 const uglifycss = require('uglifycss');
+const prism = require('markdown-it-prism');
 const minify = require('html-minifier').minify;
+
+md.use(prism);
 
 const rootDir = './src/';
 const cssName = 'ugly.css';
