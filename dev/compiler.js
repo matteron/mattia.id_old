@@ -2,7 +2,9 @@ const fs = require('fs');
 const path = require('path');
 const rimraf = require('rimraf');
 const log = require('./logger.js');
-const md = require('markdown-it')();
+const md = require('markdown-it')({
+	html: true
+});
 const uglifycss = require('uglifycss');
 const prism = require('markdown-it-prism');
 const minify = require('html-minifier').minify;

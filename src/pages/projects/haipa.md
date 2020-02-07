@@ -1,5 +1,9 @@
-## Haipa (ハイパー)
-###### January 14, 2020
+<div class="postTitle">
+    <date>January 14, 2020</date>
+    <h2>Haipa (ハイパー)</h2>
+    <!-- <date>January 14, 2020</date> -->
+    <div></div>
+</div>
 
 Haipa is a quick little project to make writing HTML a bit quicker and less painful (I really hate writing all those tags twice). I'm sure something like this has been done before, I just couldn't find it, so I built my own.
 

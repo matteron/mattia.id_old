@@ -272,6 +272,25 @@ h2 {
 }
 
 /*
+* Markdown
+*/
+.postTitle {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+}
+
+.postTitle > div,
+.postTitle > date {
+	font-size: 0.75em;
+	width: 25%;
+}
+
+.postTitle > h2 {
+	width:; 50%;
+}
+
+/*
 *	MOBILE MEDIA
 */
 
