@@ -1,7 +1,6 @@
-const chalk = require('chalk');
-
 // This is a purposely overly complicated console output.
 // Why? Cuz it was kinda fun.
+
 class Logger {
 	constructor() {
 
@@ -13,16 +12,12 @@ class Logger {
 		}
 
 		this.strings = {
-			outputFound: chalk.green('Output Path Found 🔍\n'),
-			outputMade: chalk.green('Created output paths 📁\n'),
-			cleaned: chalk.green('Cleaned '),
-			file: (verb) => chalk.yellow(' - '+ verb +': '),
-			verbing: (subject, verb) => chalk.cyan(verb + ' ' + subject + '...'),
-			finished: (subject, verb) => (
-				chalk.green(
-					'Finished ' + verb + ' ' + subject + ' ' + this.verbmoji[verb] +'\n'
-				)
-			)
+			outputFound: 'Output Path Found 🔍\n',
+			outputMade: 'Created output paths 📁\n',
+			cleaned: 'Cleaned',
+			file: (verb) => ' - '+ verb +': ',
+			verbing: (subject, verb) => verb + ' ' + subject + '...',
+			finished: (subject, verb) => 'Finished ' + verb + ' ' + subject + ' ' + this.verbmoji[verb] +'\n'
 		}
 
 		this.commands = {

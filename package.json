@@ -21,16 +21,14 @@
   },
   "homepage": "https://github.com/matteron/mattia.id-version3#readme",
   "dependencies": {
-    "chalk": "^2.4.2",
     "haipa": "^1.0.2",
-    "highlight.js": "^9.18.1",
     "html-minifier": "^4.0.0",
     "markdown-it": "^9.1.0",
     "markdown-it-prism": "^2.0.3",
-    "rimraf": "^3.0.0",
     "uglifycss": "0.0.29"
   },
   "devDependencies": {
-    "browser-sync": "^2.26.7"
+    "browser-sync": "^2.26.7",
+    "rimraf": "^3.0.2"
   }
 }
