@@ -1,6 +1,13 @@
+const rimraf = require('rimraf');
+const log = require('./logger.js');
 const Compiler = require('./compiler.js');
 let comp = new Compiler(true);
-comp.clean();
+clean();
 comp = new Compiler();
-comp.clean();
+clean();
 console.log('All Clean ✨');
+
+function clean() {
+	rimraf.sync(comp.outputPath);
+	log.print('cleaned', [this.outputPath]);
+}

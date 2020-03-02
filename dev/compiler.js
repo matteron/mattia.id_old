@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const rimraf = require('rimraf');
 const log = require('./logger.js');
 const md = require('markdown-it')({
 	html: true
@@ -213,11 +212,6 @@ module.exports = class Compiler {
 		this.css();
 		this.fonts();
 		this.html();
-	}
-
-	clean() {
-		rimraf.sync(this.outputPath);
-		log.print('cleaned', [this.outputPath]);
 	}
 
 	// For use in serve.js
