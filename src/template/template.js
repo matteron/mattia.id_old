@@ -1,9 +1,9 @@
-const haipa = require('haipa')(true);
+const { tags, attr } = require('haipa');
 const { allFonts, allCss, allProjects } = require('./haipaExt');
-const { html, head, title, meta, body, main, header, section, div, a, h1, h2, aside, i, nav, ul, li, span, article, svg, g, path } = haipa.tags;
-const { classes, lang, name, content, id, alt, href, viewBox, version, xmlns, fill, fillRule, strokeDasharray, strokeLinecap, strokeOpacity, transform, stroke, strokeWidth, d, ariaLabel } = haipa.attr;
+const { html, head, title, meta, body, main, header, section, div, a, h1, h2, aside, i, nav, ul, li, span, article, svg, g, path } = tags;
+const { classes, lang, name, content, id, alt, href, viewBox, version, xmlns, fill, fillRule, strokeDasharray, strokeLinecap, strokeOpacity, transform, stroke, strokeWidth, d, ariaLabel } = attr;
 
-exports.base = function(p) {
+exports.base = (p) => {
 	return html([lang`en`], [
 		head([], [
 			title([], [`${p.title ? `${p.title} - ` : ''}mattia.id`]),
@@ -21,10 +21,10 @@ exports.base = function(p) {
 								h1([], ['Mattia Schiano'])
 							]),
 							aside([id`socialLinks`], [
-								a([id`git`, href`https://github.com/matteron`, classes`hoverFloat slowWiggle`, ariaLabel`Github`], [
-									i([classes`icon i-github`, alt`Github`], [])
+								a([id`git`, href`https://github.com/matteron`, classes`hoverFloat`, ariaLabel`Github`], [
+									i([classes`icon i-github`, alt`Github`], []),
 								]),
-								a([id`twit`, href`https://twitter.com/mattiaschiano_`, classes`hoverFloat slowWiggle`, ariaLabel`Twitter`], [
+								a([id`twit`, href`https://twitter.com/mattiaschiano_`, classes`hoverFloat`, ariaLabel`Twitter`], [
 									i([classes`icon i-twitter`, alt`Twitter`], [])
 								])
 							])
@@ -64,6 +64,7 @@ exports.base = function(p) {
 	]);
 }
 
-exports.projectList = function(pList) {
+exports.projectList = (pList) => {
 	return h2([], ['little of this and that']) + allProjects(pList);
 }
+

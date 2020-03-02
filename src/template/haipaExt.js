@@ -1,6 +1,6 @@
-const haipa = require('haipa')(true);
-const { link, section, div, h3, a, p } = haipa.tags;
-const { href, rel, as, type, classes } = haipa.attr;
+const { tags, attr } = require('haipa');
+const { link, section, div, h3, a, p } = tags;
+const { href, rel, as, type, classes } = attr;
 
 function getFileType(path) {
 	return path.split('.').pop();

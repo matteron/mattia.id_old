@@ -22,14 +22,13 @@ function recompileTemplate(fp, subdir) {
 	if (page) {
 		comp.compileHtml(page);	
 	}
-	
 }
 
 const paths = {
-	templates: path.join(compPaths.rootPrefix, compPaths.dirs.template, '*'),
+	templates: path.join(compPaths.rootPrefix, compPaths.dirs.template, '*.js'),
 	css: path.join(compPaths.src.css, '*.css'),
 	compiled: compPaths.outputPath,
-	pages: path.join(compPaths.src.pages, '*'),
+	pages: path.join(compPaths.src.pages, '*.md'),
 	projects: path.join(compPaths.src.pages, 'projects/*.md'),
 }
 
