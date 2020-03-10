@@ -11,3 +11,4 @@ function clean() {
 	rimraf.sync(comp.outputPath);
 	log.print('cleaned', [this.outputPath]);
 }
+module.exports = clean;
