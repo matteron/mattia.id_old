@@ -23,7 +23,7 @@
   "dependencies": {
     "haipa": "^1.0.4",
     "html-minifier": "^4.0.0",
-    "markdown-it": "^9.1.0",
+    "markdown-it": "^10.0.0",
     "markdown-it-prism": "^2.0.5",
     "uglifycss": "0.0.29"
   },
