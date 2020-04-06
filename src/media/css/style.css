@@ -181,14 +181,6 @@ h2 {
 	transform: translateY(-0.4rem);
 }
 
-#git {
-	font-size: 42px;
-}
-
-#twit {
-	font-size: 36px;
-}
-
 #headerLine {
 	position: relative;
 	top: -1rem;
@@ -332,6 +324,7 @@ li {
 }
 .i-twitter:before {
 	content: "\f099";
+	font-size: 36px;
 }
 .i-umbrella:before {
 	content: "\f0e9";
@@ -339,6 +332,7 @@ li {
 }
 .i-github:before {
 	content: "\f113";
+	font-size: 42px;
 }
 
 /*

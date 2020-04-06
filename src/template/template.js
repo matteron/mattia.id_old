@@ -21,10 +21,10 @@ exports.base = (p) => {
 								h1([], ['Mattia Schiano'])
 							]),
 							aside([id`socialLinks`], [
-								a([id`git`, href`https://github.com/matteron`, classes`hoverFloat`, ariaLabel`Github`], [
+								a([href`https://github.com/matteron`, classes`hoverFloat`, ariaLabel`Github`], [
 									i([classes`icon i-github`, alt`Github`], []),
 								]),
-								a([id`twit`, href`https://twitter.com/mattiaschiano_`, classes`hoverFloat`, ariaLabel`Twitter`], [
+								a([href`https://twitter.com/mattiaschiano_`, classes`hoverFloat`, ariaLabel`Twitter`], [
 									i([classes`icon i-twitter`, alt`Twitter`], [])
 								])
 							])
