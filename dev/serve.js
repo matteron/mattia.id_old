@@ -1,6 +1,7 @@
 const path = require('path');
-const Compiler = require('./compiler.js');
-var bs = require('browser-sync').create('devServer');
+const clean = require('./clean');
+const Compiler = require('./compiler');
+const bs = require('browser-sync').create('devServer');
 
 console.log('Performing initial build...');
 let comp = new Compiler(false);
@@ -40,7 +41,7 @@ bs.watch(paths.compiled).on('change', (path) => bs.reload(path));
 
 process.on('SIGINT', function() {
     console.log('\nCleanining up...');
-	comp.clean();
+	clean();
 	console.log('Buh bye 👋');
     process.exit();
 });
