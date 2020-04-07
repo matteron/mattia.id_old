@@ -33,8 +33,13 @@ const src = Object.freeze({
 	template: '../' + rootPath(dirs.template)
 });
 
-const meta = require(path.join(src.template, 'meta'));
-const template = require(path.join(src.template, 'template'));
+let meta = require(path.join(src.template, 'meta'));
+let template = require(path.join(src.template, 'template'));
+
+function requireUncached(module) {
+    delete require.cache[require.resolve(module)];
+    return require(module);
+}
 
 // Type Commands
 function markdown(page) {
@@ -201,6 +206,11 @@ module.exports = class Compiler {
 		const out = path.join(this.outputPath, loc, fileName);
 		fs.writeFileSync(out, raw);
 		log.print('file', ['Compiled', fileName]);
+	}
+
+	refreshTemplate() {
+		meta = requireUncached(path.join(src.template, 'meta'));
+		template = requireUncached(path.join(src.template, 'template'));
 	}
 
 	html() {

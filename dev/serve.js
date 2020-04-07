@@ -25,6 +25,11 @@ function recompileTemplate(fp, subdir) {
 	}
 }
 
+function refreshTemplate() {
+	comp.refreshTemplate()
+	comp.html()
+}
+
 const paths = {
 	templates: path.join(compPaths.rootPrefix, compPaths.dirs.template, '*.js'),
 	css: path.join(compPaths.src.css, '*.css'),
@@ -33,7 +38,7 @@ const paths = {
 	projects: path.join(compPaths.src.pages, 'projects/*.md'),
 }
 
-bs.watch(paths.templates).on('change', () => comp.html());
+bs.watch(paths.templates).on('change', () => refreshTemplate());
 bs.watch(paths.css).on('change', (path) => bs.reload(path));
 bs.watch(paths.pages).on('change', (path) => recompileTemplate(path));
 bs.watch(paths.projects).on('change', (path) => recompileTemplate(path, compPaths.dirs.project));

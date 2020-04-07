@@ -17,4 +17,4 @@ I also got [browser-sync](https://www.browsersync.io) to listen to changes in te
 Either way, this makes it super easy to automate builds on [netlify](https://netlify.com).
 
 ## TODO
-- [ ] Fix template live refresh.
+- [X] Fix template live refresh.
