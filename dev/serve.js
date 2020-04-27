@@ -41,11 +41,11 @@ const paths = {
 bs.watch(paths.templates).on('change', () => refreshTemplate());
 bs.watch(paths.css).on('change', (path) => bs.reload(path));
 bs.watch(paths.pages).on('change', (path) => recompileTemplate(path));
-bs.watch(paths.projects).on('change', (path) => recompileTemplate(path, compPaths.dirs.project));
+bs.watch(paths.projects).on('change', (path) => recompileTemplate(path, compPaths.dirs.projects));
 bs.watch(paths.compiled).on('change', (path) => bs.reload(path));
 
 process.on('SIGINT', function() {
-    console.log('\nCleanining up...');
+    console.log('\nCleaning up...');
 	clean();
 	console.log('Buh bye 👋');
     process.exit();

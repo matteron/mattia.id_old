@@ -29,22 +29,25 @@
 :root {
 	/* Base Colors */
 	--dark: #222222;
-	--light: #F1EEE7;
+	--light: #f2f2f2;
 	--shadow: rgba(0, 0, 0, 0.125);
 	--checker: rgba(0, 0, 0, 0.05);
 
 	/* Accent Colors */
 	--purple: #9c528b;
-	--red: #EF626C;
-	--green: #7AA095;
-	--blue: #6D72C3;
+	--red: #D1345B;
+	--green: #2BB6A9;
+	--blue: #4392F1;
 
 	/* Proper Variables */
 	--bg: var(--light);
 	--fg: var(--dark);
 	--accent: var(--purple);
-
 }
+
+.red { --accent: var(--red); }
+.blue { --accent: var(--blue); }
+.green { --accent: var(--green); }
 
 ::selection {
 	background: var(--accent);
@@ -118,18 +121,6 @@ article a {
 
 article a:hover {
 	text-decoration: underline;
-}
-
-.red {
-	--accent: var(--red);
-}
-
-.blue {
-	--accent: var(--blue);
-}
-
-.green {
-	--accent: var(--green);
 }
 
 h1, h2 {

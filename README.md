@@ -18,3 +18,13 @@ Either way, this makes it super easy to automate builds on [netlify](https://net
 
 ## TODO
 - [X] Fix template live refresh.
+
+## Colors History:
+
+### Before April 27, 2020
+Light: #F1EEE7;
+Dark: #222222;
+Purple: #9c528b;
+Red: #EF626C;
+Green: #7AA095;
+Blue: #6D72C3;
