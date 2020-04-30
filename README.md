@@ -23,7 +23,7 @@ Either way, this makes it super easy to automate builds on [netlify](https://net
 ### Before April 27, 2020
 ![Light: #F1EEE7](https://img.shields.io/badge/Light-%23F1EEE7-%23F1EEE7)
 ![Dark: #222222](https://img.shields.io/badge/Dark-%23222222-%23222222)
-![Purple: #9c528b](https://img.shields.io/badge/Purple-%239c528b-%239c528b)
+![Purple: #9C528B](https://img.shields.io/badge/Purple-%239C528B-%239C528B)
 ![Red: #EF626C](https://img.shields.io/badge/Red-%23EF626C-%23EF626C)
 ![Green: #7AA095](https://img.shields.io/badge/Green-%237AA095-%237AA095)
 ![Blue: #6D72C3](https://img.shields.io/badge/Blue-%236D72C3-%236D72C3)
