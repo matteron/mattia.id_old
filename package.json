@@ -1,5 +1,5 @@
 {
-  "name": "mattia.id-version3",
+  "name": "mattia.id",
   "version": "1.0.0",
   "description": "[![Netlify Status](https://api.netlify.com/api/v1/badges/075be8a8-5957-4130-82fc-82c93c67a8d4/deploy-status)](https://app.netlify.com/sites/mattiaschiano/deploys)",
   "main": "build.js",
@@ -11,17 +11,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/matteron/mattia.id-version3.git"
+    "url": "git+https://github.com/matteron/mattia.id.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Mattia",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/matteron/mattia.id-version3/issues"
+    "url": "https://github.com/matteron/mattia.id/issues"
   },
-  "homepage": "https://github.com/matteron/mattia.id-version3#readme",
+  "homepage": "https://github.com/matteron/mattia.id#readme",
   "dependencies": {
-    "haipa": "^2.0.0",
+    "haipa": "^2.0.1",
     "html-minifier": "^4.0.0",
     "markdown-it": "^10.0.0",
     "markdown-it-prism": "^2.0.5",

@@ -179,7 +179,6 @@ module.exports = class Compiler {
 	
 	processTemplate(params) {
 		const temp = template.base(params);
-		console.log(temp);
 		if (this.isBuild) {
 			const minifyArgs = {
 				collapseWhitespace: true,
