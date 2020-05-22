@@ -10,14 +10,14 @@ Thus, I cared less about load times this time, because as usual, I was preoptimi
 ## Templating System
 I realized that maintaing consistent, static html files was gonna be a pain, so I went through and tried to make a templating and build system.
 
-I'm started off [mustache](http://mustache.github.io), but now have my own weird custom templating system using javascript.  Currently, I'm using [Haipa](https://github.com/matteron/Haipa) to create HTML strings.
+I'm started off [mustache](http://mustache.github.io), but now have my own weird custom templating system using javascript.  Currently, I'm using [Haipa](https://github.com/matteron/Haipa) to create HTML strings along with my build tool, [Buildspace](https://github.com/matteron/buildspace)
 
 I also got [browser-sync](https://www.browsersync.io) to listen to changes in template files and recompile only the needed ones.  (Though listening to changes in the template itself did seem to break in the transition...)
 
 Either way, this makes it super easy to automate builds on [netlify](https://netlify.com).
 
 ## TODO
-- [X] Fix template live refresh.
+- [x] Fix template live refresh.
 
 ## Color History:
 ### Before April 27, 2020

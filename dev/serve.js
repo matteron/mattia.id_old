@@ -1,52 +1,50 @@
-const path = require('path');
-const clean = require('./clean');
-const Compiler = require('./compiler');
-const bs = require('browser-sync').create('devServer');
+const buildspace = require('./buildspace');
+const browsersync = require('browser-sync');
+let Template = require('../src/templating/template');
 
-console.log('Performing initial build...');
-let comp = new Compiler(false);
-comp.run();
 
-const compPaths = comp.paths();
-const meta = require(path.join(compPaths.src.template, 'meta'));
+const src = buildspace.options.source;
+const out = buildspace.options.output;
 
-console.log('Starting server...');
-bs.init({
-	server: [compPaths.outputPath, compPaths.rootPrefix],
+buildspace.enter();
+
+const requireUncached = (module) => {
+    delete require.cache[require.resolve(module)];
+    return require(module);
+}
+
+browsersync.init({
+    server: {
+        baseDir: out,
+        serveStaticOptions: {
+            extensions: ['html']
+        }
+    }
 });
 
-function recompileTemplate(fp, subdir) {
-	let type = path.extname(fp);
-	let baseName = path.basename(fp, type);
-	let name = subdir ? path.join(subdir, baseName) : baseName;
-	let page = meta.pages.find((e) => e.name.toLowerCase() === name.toLowerCase());
-	if (page) {
-		comp.compileHtml(page);	
-	}
-}
+browsersync.watch(src + '/**/*.css').on('change', (loc) => {
+	buildspace.copyFile('/media/style.css');
+    browsersync.reload(loc);
+});
 
-function refreshTemplate() {
-	comp.refreshTemplate()
-	comp.html()
-}
+browsersync.watch(src + '/pages/**/*.md').on('change', (loc) => {
+	const name = loc.substr('src/pages/'.length).split('.')[0];
+    const page = buildspace.pages.find(p => p.path === name);
+    if (page) {
+		page.renderBody();
+        buildspace.writeToFile(page.path, buildspace.compilePage(page))
+    }
+    browsersync.reload(loc);
+});
 
-const paths = {
-	templates: path.join(compPaths.rootPrefix, compPaths.dirs.template, '*.js'),
-	css: path.join(compPaths.src.css, '*.css'),
-	compiled: compPaths.outputPath,
-	pages: path.join(compPaths.src.pages, '*.md'),
-	projects: path.join(compPaths.src.pages, 'projects/*.md'),
-}
-
-bs.watch(paths.templates).on('change', () => refreshTemplate());
-bs.watch(paths.css).on('change', (path) => bs.reload(path));
-bs.watch(paths.pages).on('change', (path) => recompileTemplate(path));
-bs.watch(paths.projects).on('change', (path) => recompileTemplate(path, compPaths.dirs.projects));
-bs.watch(paths.compiled).on('change', (path) => bs.reload(path));
+browsersync.watch(src + '/templating/template.js').on('change', (loc) => {
+	Template = requireUncached('../src/templating/template');
+    buildspace.pages.forEach(p => p.template = new Template());
+    buildspace.enter();
+	browsersync.reload(loc);
+});
 
 process.on('SIGINT', function() {
-    console.log('\nCleaning up...');
-	clean();
-	console.log('Buh bye 👋');
+    require('./clean');
     process.exit();
 });

@@ -21,11 +21,9 @@
   },
   "homepage": "https://github.com/matteron/mattia.id#readme",
   "dependencies": {
-    "haipa": "^2.0.1",
-    "html-minifier": "^4.0.0",
-    "markdown-it": "^10.0.0",
-    "markdown-it-prism": "^2.0.5",
-    "uglifycss": "0.0.29"
+    "buildspace": "^0.1.2",
+    "haipa": "^2.1.1",
+    "marked": "^1.1.0"
   },
   "devDependencies": {
     "browser-sync": "^2.26.7",

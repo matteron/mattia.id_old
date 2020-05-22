@@ -1,67 +1,26 @@
 const { h } = require('haipa');
 const { Tag } = require('haipa/lib/tag');
 
-function getFileType(path) {
-	return path.split('.').pop();
-}
-
-Tag.prototype.font = function(fontPath) {
-	return this.link(h()
-		.rel('preload')
-		.as('font')
-		.type(`font/${getFileType(fontPath)}`)
-		.href(fontPath)
-		.crossOrigin('true')
-	);
-}
-
 Tag.prototype.allFonts = function(fontList) {
-	fontList.forEach(f => this.font(f))
-	return this;
+	return this.forEach(fontList, (tag, f) => tag.font(f));
 }
-// const font = function(fontPath) {
-// 	return link([
-// 		rel`preload`,
-// 		as`font`,
-// 		type(`font/${getFileType(fontPath)}`),
-// 		href(fontPath),
-// 		`crossorigin`
-// 	]);
-// }
-// exports.font = font;
-
-// exports.allFonts = function(fontList) {
-// 	return fontList.reduce((acc, cur) => `${acc}\n${font(cur)}`, '');
-// }
-
-// const projectListing = function(proj) {
-// 	return section([classes`projectEntry`], [
-// 		h3([classes`projectTitle`], [
-// 			a([href(`projects/${proj.name}.html`)], [proj.name])
-// 		]),
-// 		p([classes`projectDesc`], [proj.desc])
-// 	]);
-// }
-// exports.projectListing = projectListing;
-
-// exports.allProjects = function(pList) {
-// 	return pList.reduce((acc, cur) => `${acc}\n${projectListing(cur)}`, '');
-// }
 
 Tag.prototype.projectListing = function(proj) {
 	return this.section(h().class('projectEntry')
 		.h3(h().class('projectTitle')
-			.a(h().href(`projects/${proj.name}.html`).txt(proj.name))
+			.a(h()
+				.href(`projects/${proj.name}.html`)
+				.txt(proj.name)
+			)
 		)
 		.p(h().class('projectDesc')
 			.txt(proj.desc)
 		)
-	)
+	);
 }
 
 Tag.prototype.allProjects = function(pList) {
-	pList.forEach(p => this.projectListing(p))
-	return this;
+	return this.forEach(pList, (tag, p) => tag.projectListing(p));
 }
 
 const properCase = (text) => text[0].toUpperCase() + text.substr(1).toLowerCase();
@@ -79,7 +38,7 @@ Tag.prototype.socialIcon = function(name, href) {
 		.class('hoverFloat')
 		.ariaLabel(properCase(name))
 		.faIcon(name)
-	)
+	);
 }
 
 const navIconDict = {
