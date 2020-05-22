@@ -16,15 +16,18 @@ The [Haipa readme](https://github.com/matteron/Haipa) is a good place to underst
 
 The following:
 ```javascript
-h().div(h().id('example')
-    .p(h().txt('hiya'))
+h().div(h()
+    .id('example')
+    .a(h().id('link-example').href('/projects/haipa')
+        .txt('Haipa')
+    )
 );
 ```
 
 Produces a string with:
 ```html
 <div id="example">
-    <p>hiya</p>
+    <a id="link-example" href="/projects/haipa">Haipa</a>
 </div>
 ```
 
