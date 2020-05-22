@@ -18,7 +18,9 @@ The following:
 ```javascript
 h().div(h()
     .id('example')
-    .a(h().id('link-example').href('/projects/haipa')
+    .a(h()
+        .id('link-example')
+        .href('/projects/haipa')
         .txt('Haipa')
     )
 );
@@ -27,9 +29,18 @@ h().div(h()
 Produces a string with:
 ```html
 <div id="example">
-    <a id="link-example" href="/projects/haipa">Haipa</a>
+    <a
+        id="link-example"
+        href="/projects/haipa"
+    >
+        Haipa
+    </a>
 </div>
 ```
+
+> Listen I know the spacing of that html is kinda ridiculous, I promise I wasn't trying to cheat, it just wouldn't fit otherwise.  
+
+> Also, if you would like a far more in-depth example, the [template](https://github.com/matteron/mattia.id/blob/master/src/templating/template.js) for this site has a lot of *advanced* functionality.
 
 I find that writing Haipa is way faster and more natural.  For me writing html tags seems to break my flow and is slow.  Modern text editors will sometimes try and rectify this with autocompletion, but I'd rather just be able to write it quickly in any environment.
 
