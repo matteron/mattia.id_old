@@ -1,8 +1,10 @@
-<div class="postTitle">
-    <date>January 14, 2020</date>
-    <h2>Haipa (ハイパー)</h2>
-    <div></div>
-</div>
+----
+title: Haipa (ハイパー)
+date: January 14, 2020
+desc: HTML templating shorthand for JavaScript.
+----
+
+[Repository](https://github.com/matteron/haipa)
 
 Haipa is a quick little project to make writing HTML a bit quicker and less painful (I really hate writing all those tags twice). I'm sure something like this has been done before, I just couldn't find it, so I built my own.
 
@@ -49,4 +51,3 @@ Haipa also allows for extensions to component-ize your templates.  For example, 
 After a while of using Haipa for all my side projects, I quickly found a bunch of pain points and eventually went back to the drawing board and came up with Haipa v2.  This was a complete rewrite of the library, including completely different syntax.  I also included some components to address the common patterns I was finding myself copying from project to project, like loops and stylesheet links.
 
 Finally, I'd like to mention, you may have noticed the excessive use of first person nouns in this post.  Haipa is entirely built for myself and not intended to be a general purpose tool at all, so sorry if you hate it.
-

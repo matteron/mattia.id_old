@@ -23,7 +23,8 @@ module.exports = class Template {
 							)
 							.aside(h().id('socialLinks')
 								.socialIcon('github', 'https://github.com/matteron')
-								.socialIcon('twitter', 'https://twitter.com/mattiaschiano_')
+								// Disabling while I try to find a job.  You know how companies are.
+								// .socialIcon('twitter', 'https://twitter.com/mattiaschiano_')
 							)
 						)
 						.svg(h().id('headerLine').version('1.1').viewBox('0 0 525 4').xmlns('http://www.w3.org/2000/svg')

@@ -1,33 +1,6 @@
 const Page = require('./templating/page');
 const { accentColors } = require('./meta');
-
-// Sorted Newest to oldest
-const projects = [
-	new Page({
-		path: 'projects/haipa',
-		data: {
-			title: 'Haipa',
-			desc: 'HTML templating shorthand for JavaScript.'
-		}
-	}),
-	new Page({
-		path: 'projects/a-menu',
-		data: {
-			title: 'A-Menu',
-			desc: 'Recipe Manager / Weekly Menu Generator for my Mom.'
-		}
-	}),
-	new Page({
-		path: 'projects/tono',
-		data: {
-			title: 'Tono',
-			desc: 'Cartridge based digital music player.',
-		}
-	})
-].map(p => {
-	p.data.accent = accentColors.blue;
-	return p;
-});
+const projects = require('./projects');
 
 const base = [
 	new Page({
@@ -52,7 +25,11 @@ const base = [
 			desc: 'Little of this and that.',
 			accent: accentColors.red
 		},
-		projectList: projects.map(p => ({name: p.data.title, desc: p.data.desc}))
+		projectList: projects.map(p => ({
+			name: p.data.title,
+			href: p.path,
+			desc: p.data.desc
+		}))
 	})
 ];
 

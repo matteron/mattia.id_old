@@ -9,7 +9,7 @@ Tag.prototype.projectListing = function(proj) {
 	return this.section(h().class('projectEntry')
 		.h3(h().class('projectTitle')
 			.a(h()
-				.href(`projects/${proj.name}.html`)
+				.href(proj.href)
 				.txt(proj.name)
 			)
 		)

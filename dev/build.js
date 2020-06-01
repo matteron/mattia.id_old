@@ -1,2 +1,1 @@
-const bs = require('./buildspace');
-bs.enter();
+require('./buildspace').enter();

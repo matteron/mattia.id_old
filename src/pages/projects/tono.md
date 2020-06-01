@@ -1,18 +1,16 @@
-<div class="postTitle">
-    <date>September 5, 2019</date>
-    <h2>Tono</h2>
-    <div></div>
-</div>
+![Tono v2](/media/img/tono/tono2.jpeg)
 
-Work in progress, just updating with what I have so far.
-
-**Picture of Current Tono Here**
+----
+title: Tono
+date: September 5, 2019
+desc: Cartridge based digital music player.
+----
 
 Tono is basically just a record player which takes cartridges instead of vinyl.  In the age of streaming services making it easy to quickly put music on without thinking, I wanted a device that could mimic the deliberate ritual that comes with a record player, without the associated price.  (I'm sure if I add up all the money I sunk into developing this thing, I probably aggressively missed that goal.)
 
 ### Tono v1
 
-**Picture of old Tono**
+![Tono v1](/media/img/tono/tono1.jpeg)
 
 Pictured above is the original Tono.  I started it conceptualizing it some time in December 2017, and finalized it late March of the following year.
 

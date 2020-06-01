@@ -6,7 +6,6 @@ const bs = new Buildspace({
 	copy: ['media'],
 });
 
-bs.setDefaultTemplate(Template);
-bs.bulkRegister(Pages);
+bs.bulkRegister(Pages, Template);
 
 module.exports = bs;
