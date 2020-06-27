@@ -8,14 +8,9 @@ Tag.prototype.allFonts = function(fontList) {
 Tag.prototype.projectListing = function(proj) {
 	return this.section(h().class('projectEntry')
 		.h3(h().class('projectTitle')
-			.a(h()
-				.href(proj.href)
-				.txt(proj.name)
-			)
+			.a(h(proj.name).href(proj.href))
 		)
-		.p(h().class('projectDesc')
-			.txt(proj.desc)
-		)
+		.p(h(proj.desc).class('projectDesc'))
 	);
 }
 
@@ -51,7 +46,7 @@ Tag.prototype.navIcon = function(name, current) {
 		.a(h().href(`/${name}.html`)
 			.class(`navLink ${current === properCase(name) ? 'location' : ''}`)
 			.i(h().class(`icon i-${navIconDict[name]} fastWiggle`))
-			.span(h().txt(properCase(name)))
+			.span(h(properCase(name)))
 		)
 	);
 }

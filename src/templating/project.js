@@ -13,8 +13,8 @@ const parseProps = (raw) => raw.split('\n').filter(p => p).reduce((acc, cur) => 
 }, {});
 
 const postHeading = (props) => h().div(h().class('postTitle')
-	.h2(h().txt(props.title))
-	.div(h().txt(props.date))
+	.h2(h(props.title))
+	.div(h(props.date))
 ).render();
 
 const prepareProject = (dir, file) => {

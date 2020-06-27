@@ -13,7 +13,7 @@ module.exports = class Page {
 	}
 
 	createList = () => h().div(h()
-		.h2(h().txt('little of this and that'))
+		.h2(h('little of this and that'))
 		.allProjects(this.projectList)
 	).render();
 
