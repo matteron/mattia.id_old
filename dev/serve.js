@@ -38,11 +38,11 @@ dv.watch(projectsDir + '*.md', (e, f) => {
 	const name = f.split('.')[0];
 	const index = bs.pages.findIndex(p => p.path === 'projects/' + name);
 	if (index > -1) {
-		bs[index] = prepareProject(src + projectsDir, f);
-		bs[index].template = new Template();
-		bs[index].renderBody();
-		const compiled = bs.compilePage(bs[index]);
-		bs.writeToFile(bs[index].path, compiled);
+		bs.pages[index] = prepareProject(src + projectsDir, f);
+		bs.pages[index].template = new Template();
+		bs.pages[index].renderBody();
+		const compiled = bs.compilePage(bs.pages[index]);
+		bs.writeToFile(bs.pages[index].path, compiled);
 	}
 });
 
