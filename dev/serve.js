@@ -1,5 +1,5 @@
 const bs = require('./buildspace');
-const { Davit } = require('../../lively/lib/index');
+const { Davit } = require('davit');
 
 const prepareProject = require('../src/templating/project');
 let Template = require('../src/templating/template');

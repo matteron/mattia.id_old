@@ -1,8 +1,8 @@
-const Buildspace = require('buildspace');
+const { BuildSpace } = require('buildspace');
 const Template = require('../src/templating/template');
 const Pages = require('../src/pages');
 
-const bs = new Buildspace({
+const bs = new BuildSpace({
 	copy: ['media'],
 });
 
