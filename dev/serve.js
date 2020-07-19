@@ -1,67 +1,58 @@
-const buildspace = require('./buildspace');
-const browsersync = require('browser-sync');
+const bs = require('./buildspace');
+const { Davit } = require('../../lively/lib/index');
 
 const prepareProject = require('../src/templating/project');
 let Template = require('../src/templating/template');
 
-const src = buildspace.options.source;
-const out = buildspace.options.output;
+const src = bs.options.source;
+const out = bs.options.output;
 
-buildspace.enter();
+bs.enter();
 
 const requireUncached = (module) => {
 	delete require.cache[require.resolve(module)];
 	return require(module);
 }
 
-browsersync.init({
-	server: {
-		baseDir: out,
-		serveStaticOptions: {
-			extensions: ['html']
-		}
-	}
+const dv = new Davit({
+	source: src,
+	root: out
 });
 
-browsersync.watch(src + '/**/*.css').on('change', (loc) => {
-	buildspace.copyFile('/media/style.css');
-	browsersync.reload(loc);
+dv.watch('/media/style.css', () => {
+	bs.copyFile('/media/style.css');
 });
 
-// Normal Pages
-const pagesDir = src + '/pages/';
-browsersync.watch(pagesDir + '*.md').on('change', (loc) => {
-	const name = loc.substr(pagesDir.length).split('.')[0];
-	const page = buildspace.pages.find(p => p.path === name);
+const pagesDir = '/pages/';
+dv.watch(pagesDir + '*.md', (_, f) => {
+	const name = f.split('.')[0];
+	const page = bs.pages.find(p => p.path === name);
 	if (page) {
 		page.renderBody();
-		buildspace.writeToFile(page.path, buildspace.compilePage(page));
-		browsersync.reload(loc);
+		bs.writeToFile(page.path, bs.compilePage(page));
 	}
 });
 
-// Projects
 const projectsDir = pagesDir + 'projects/';
-browsersync.watch(projectsDir + '*.md').on('change', (loc) => {
-	const file = loc.substr(projectsDir.length);
-	const name = file.split('.')[0];
-	const index = buildspace.pages.findIndex(p => p.path === 'projects/' + name);
+dv.watch(projectsDir + '*.md', (e, f) => {
+	const name = f.split('.')[0];
+	const index = bs.pages.findIndex(p => p.path === 'projects/' + name);
 	if (index > -1) {
-		buildspace[index] = prepareProject(projectsDir, file);
-		buildspace[index].template = new Template();
-		buildspace[index].renderBody();
-		const compiled = buildspace.compilePage(buildspace[index]);
-		buildspace.writeToFile(buildspace[index].path, compiled);
-		browsersync.reload(loc);
+		bs[index] = prepareProject(src + projectsDir, f);
+		bs[index].template = new Template();
+		bs[index].renderBody();
+		const compiled = bs.compilePage(bs[index]);
+		bs.writeToFile(bs[index].path, compiled);
 	}
 });
 
-browsersync.watch(src + '/templating/template.js').on('change', (loc) => {
+dv.watch('/templating/template.js', () => {
 	Template = requireUncached('../src/templating/template');
-	buildspace.pages.forEach(p => p.template = new Template());
-	buildspace.enter();
-	browsersync.reload(loc);
+	bs.pages.forEach(p => p.template = new Template());
+	bs.enter();
 });
+
+dv.start();
 
 process.on('SIGINT', function() {
 	require('./clean');
