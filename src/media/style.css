@@ -334,17 +334,3 @@ pre {
 				-3px 3px 0 3px var(--shadow);
 	border-radius: 3px;
 }
-
-.token.tag,
-.token.function {
-	color: var(--purple);
-}
-
-.token.string,
-.token.attr-value {
-	color: var(--green);
-}
-
-.token.punctuation {
-	color: var(--fg);
-}

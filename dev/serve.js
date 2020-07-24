@@ -34,7 +34,7 @@ dv.watch(pagesDir + '*.md', (_, f) => {
 });
 
 const projectsDir = pagesDir + 'projects/';
-dv.watch(projectsDir + '*.md', (e, f) => {
+dv.watch(projectsDir + '*.md', (f) => {
 	const name = f.split('.')[0];
 	const index = bs.pages.findIndex(p => p.path === 'projects/' + name);
 	if (index > -1) {
