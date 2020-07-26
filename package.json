@@ -22,11 +22,12 @@
   "homepage": "https://github.com/matteron/mattia.id#readme",
   "dependencies": {
     "buildspace": "^0.1.7",
-    "haipa": "^2.2.5",
+    "haipa": "^3.0.0",
     "marked": "^1.1.1"
   },
   "devDependencies": {
     "davit": "^1.0.2",
+    "nodemark": "^0.3.0",
     "rimraf": "^3.0.2"
   }
 }

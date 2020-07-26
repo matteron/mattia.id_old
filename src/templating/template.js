@@ -3,7 +3,7 @@ const { fonts } = require('../meta');
 require('./haipaExt');
 
 module.exports = class Template {
-	build = (data) => h().html(h()
+	build = (data) => h().doctype().html(h()
 		.lang('en')
 		.head(h()
 			.title(h(`${data.title ? `${data.title} - ` : ''}mattia.id`))

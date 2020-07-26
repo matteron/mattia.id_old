@@ -1,11 +1,11 @@
 const { h } = require('haipa');
-const { Tag } = require('haipa/lib/tag');
+const { HaipaNode } = require('haipa/lib/main/node');
 
-Tag.prototype.allFonts = function(fontList) {
+HaipaNode.prototype.allFonts = function(fontList) {
 	return this.forEach(fontList, (tag, f) => tag.font(f));
 }
 
-Tag.prototype.projectListing = function(proj) {
+HaipaNode.prototype.projectListing = function(proj) {
 	return this.section(h().class('projectEntry')
 		.h3(h().class('projectTitle')
 			.a(h(proj.name).href(proj.href))
@@ -14,20 +14,20 @@ Tag.prototype.projectListing = function(proj) {
 	);
 }
 
-Tag.prototype.allProjects = function(pList) {
+HaipaNode.prototype.allProjects = function(pList) {
 	return this.forEach(pList, (tag, p) => tag.projectListing(p));
 }
 
 const properCase = (text) => text[0].toUpperCase() + text.substr(1).toLowerCase();
 
-Tag.prototype.faIcon = function(name) {
+HaipaNode.prototype.faIcon = function(name) {
 	return this.i(h()
 		.class(`icon i-${name}`)
 		.alt(properCase(name))
 	);
 }
 
-Tag.prototype.socialIcon = function(name, href) {
+HaipaNode.prototype.socialIcon = function(name, href) {
 	return this.a(h()
 		.href(href)
 		.class('hoverFloat')
@@ -41,7 +41,7 @@ const navIconDict = {
 	'projects': 'umbrella'
 }
 
-Tag.prototype.navIcon = function(name, current) {
+HaipaNode.prototype.navIcon = function(name, current) {
 	return this.li(h()
 		.a(h().href(`/${name}.html`)
 			.class(`navLink ${current === properCase(name) ? 'location' : ''}`)
@@ -51,7 +51,7 @@ Tag.prototype.navIcon = function(name, current) {
 	);
 }
 
-Tag.prototype.navList = function(current) {
+HaipaNode.prototype.navList = function(current) {
 	return this.ul(h()
 		.id('navList')	
 		.class('bigShadow')
@@ -60,4 +60,4 @@ Tag.prototype.navList = function(current) {
 	);
 }
 
-module.exports = Tag;
+module.exports = HaipaNode;
