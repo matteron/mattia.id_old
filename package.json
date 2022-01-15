@@ -23,7 +23,7 @@
   "dependencies": {
     "buildspace": "^0.1.7",
     "haipa": "^3.0.0",
-    "marked": "^2.0.0"
+    "marked": "^4.0.10"
   },
   "devDependencies": {
     "davit": "^1.0.2",
