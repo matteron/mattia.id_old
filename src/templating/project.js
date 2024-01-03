@@ -20,14 +20,14 @@ const postHeading = (props) => h().div(h().class('postTitle')
 const prepareProject = (dir, file) => {
 	const loc = normalizedJoin(dir, file);
 	const raw = fs.readFileSync(loc, 'utf-8');
-	
+
 	const sets = raw.split('----');
 	const props = parseProps(sets[1]);
 
 	const path = props.path
 		? props.path
 		: 'projects/' + file.split('.')[0];
-	
+
 	return new Page({
 		path,
 		data: {
@@ -35,6 +35,7 @@ const prepareProject = (dir, file) => {
 			title: props.title,
 			desc: props.desc,
 			date: new Date(props.date),
+			skip: props.skip,
 			raw: sets[0] + postHeading(props) + sets[2],
 		}
 	});
