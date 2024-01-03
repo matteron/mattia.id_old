@@ -28,7 +28,8 @@ const base = [
 		projectList: projects.map(p => ({
 			name: p.data.title,
 			href: p.path,
-			desc: p.data.desc
+			desc: p.data.desc,
+			skip: p.data.skip,
 		}))
 	})
 ];

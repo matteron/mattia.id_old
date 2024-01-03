@@ -6,6 +6,16 @@ date: September 5, 2019
 desc: Cartridge based digital music player.
 ----
 
+---
+
+#### Update: January 3, 2024
+
+I [finally] added a write up of version 2.  I'd give you a link, but I never bothered to add anchors for the headers to my static site generator I guess!  If you search for 'Tono v2' on the page it should be the first result.
+
+I'm not a good writer in the first place and wrote it while very sick and sleep deprived, so I don't blame you if you just wanna look at the pretty pictures on the [gallery page](/projects/tono/gallery).
+
+---
+
 Tono is basically just a record player which takes cartridges instead of vinyl.  In the age of streaming services making it easy to quickly put music on without thinking, I wanted a device that could mimic the deliberate ritual that comes with a record player, without the associated price.  (I'm sure if I add up all the money I sunk into developing this thing, I probably aggressively missed that goal.)
 
 ### Tono v1
@@ -52,11 +62,11 @@ However these were all manageable problems, so I ignored them and carried on.  S
 #### Updated: January 3, 2024 (a casual 3.5 years later)
 ---
 
-I do apologize if anyone read all those ramblings just to find a blank header where the description of the better version of the project was supposed to be.  The following is an even more rambley, unreviewed, unedited attempt at remembering how I made v2.  You've been warned <3
+I do apologize if anyone read all those ramblings just to find a blank header where the description of the better version of the project was supposed to be.  The following is an even more rambley, unreviewed, and unedited attempt at remembering how I made v2.  You've been warned <3
 
 ---
 
-Either way, I'm a bit rusty on all the details now, but at some point I took another swing at the idea.  Main focus was performance and getting cartridge reading to be consistent.  Both issues kinda ruined the entire "experience" of using the thing so I got a little fixated.  My general goal was to not be worse than a record player.
+I'm a bit rusty on all the details now, but at some point I took another swing at the idea.  Main focus was performance and getting cartridge reading to be consistent.  Both issues kinda ruined the entire "experience" of using the thing so I got a little fixated.  My general goal was to not be worse than a record player.
 
 First thing was to get rid of the pi.  I mostly used it because it was easy and Tono was supposed to be a quick fun thing to try, but it was a whole computer running a proper os.  I still very much didn't know what I was doing, but was vaguely aiming at the world of single board computers because I felt like it something be powerful enough to play flac files (I still had a what.cd sticker on my water bottle in 2019, it better player flac files dang it).
 
@@ -100,11 +110,13 @@ But Tono 2 was done and then I never really used it because I got an office job 
 
 A bigger apology for making you read all that!  I seem to be an even more annoying writer than I used to be!  
 
+This project was a ton of fun to make, but now mostly sits unused in a little box on my bookshelf
+
 I've had occasional thoughts on a version 3.  More refined case design, have a snes-style bay-door for the slot, make the cartridge an sd-extender (though that goes against keeping the carts cheap and easy), correct way to do the cart-power-switch idea, etc.  But, I haven't really ended up using Tono for listening so I haven't carved out the time yet.  Oh well!
 
 ![A cracked open Megaman Battle Network toy cartridge](/media/img/tono/mmbn.jpeg)
 
-A few months after I wrapped up v2, I remember I had a [Megaman Battle Network toy](https://static.wikia.nocookie.net/megaman/images/0/08/MMNTWG4141.png/revision/latest?cb=20140320003212) that used cartridges.  Took one apart and found the same cartridge idea.
+A few months after I wrapped up v2, I remember I had a [Megaman Battle Network toy](https://static.wikia.nocookie.net/megaman/images/0/08/MMNTWG4141.png/revision/latest?cb=20140320003212) that used cartridges.  Took one apart and found the same idea I used for Tono 2.
 
 I do still have a zip in my backups of all the progress pics, model files, etc that I still have.  [Here's a quick gallery page](/projects/tono/gallery) I whipped up.
 

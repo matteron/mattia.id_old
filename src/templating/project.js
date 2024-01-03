@@ -24,6 +24,8 @@ const prepareProject = (dir, file) => {
 	const sets = raw.split('----');
 	const props = parseProps(sets[1]);
 
+	console.log(props)
+
 	const path = props.path
 		? props.path
 		: 'projects/' + file.split('.')[0];
@@ -35,7 +37,7 @@ const prepareProject = (dir, file) => {
 			title: props.title,
 			desc: props.desc,
 			date: new Date(props.date),
-			skip: props.skip,
+			skip: props.skip === 'true',
 			raw: sets[0] + postHeading(props) + sets[2],
 		}
 	});

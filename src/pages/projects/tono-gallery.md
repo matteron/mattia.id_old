@@ -9,7 +9,7 @@ path: projects/tono/gallery
 
 Just blowing the dust off these old pictures and things.
 
-Need to fix how images are rendered on my site...
+(Really need to fix how images are rendered on my site...)
 
 ![Tono 2's first case render](/media/img/tono/tono2_v1_case.png)
 _Tono 2's First Case Render_
